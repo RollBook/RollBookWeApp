@@ -1,0 +1,5 @@
+<!--pages/user/user.wxml-->
+
+<!-- 导航栏 -->
+<robok-nav-bar/>
+用户

@@ -1,11 +1,35 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/logs/logs"
+    "custom-tab-bar/index",
+    "pages/bookshelf/bookshelf",
+    "pages/user/user"
   ],
+  "tabBar": {
+    "custom": true,
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/bookshelf/bookshelf",
+        "text": "书架"
+      },
+      {
+        "pagePath": "pages/user/user",
+        "text": "用户"
+      }
+    ]
+  },
   "window": {
     "backgroundTextStyle": "light",
     "navigationStyle": "custom"
+  },
+  "usingComponents": {
+    "van-tabbar": "@vant/weapp/tabbar/index",
+    "van-tabbar-item": "@vant/weapp/tabbar-item/index",
+    "robok-nav-bar": "./components/RobokNavBar/RobokNavBar"
   },
   "sitemapLocation": "sitemap.json"
 }

@@ -1,2 +1,2 @@
 <!--components/robok-nav-bar/robok-nav-bar.wxml-->
-<van-nav-bar fixed="true" custom-class="cover" title-class="title" title="RollBook"/>
+<van-nav-bar custom-class="cover" title-class="title" title="RollBook"/>

@@ -1,6 +1,5 @@
 {
   "usingComponents": {
-    "van-nav-bar": "@vant/weapp/nav-bar/index",
-    "robok-nav-bar": "../../components/RobokNavBar/RobokNavBar"
+  
   }
 }
