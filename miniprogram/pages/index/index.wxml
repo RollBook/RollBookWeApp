@@ -1,0 +1,10 @@
+<!--index.wxml-->
+
+<!-- 导航栏 -->
+<robok-nav-bar/>
+
+<view class="container">
+<!-- 轮播图 -->
+
+
+</view>

@@ -1,0 +1,8 @@
+/* components/robok-nav-bar/robok-nav-bar.wxss */
+.cover{
+  letter-spacing: 5rpx;
+ }
+
+ .title {
+   color: gray !important;
+ }
