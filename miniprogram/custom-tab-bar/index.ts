@@ -15,9 +15,7 @@ Component({
    * 选项卡初始数据
    */
   data: {
-    selected: 0 as number,
-    color: "#737674" as string,
-    selectedColor: "#26ff8e" as string,
+    active: null as number|null,
     list: [{
       pagePath: "../index/index",
       icon:"home-o",
@@ -41,14 +39,11 @@ Component({
    * 组件的方法列表
    */
   methods: {
+    
     // 切换选项卡
-    switchTab(e:WechatMiniprogram.BaseEvent) {
-      const data:Record<string, any> = e.currentTarget.dataset
-      const url:string = data.path
-      
-      wx.switchTab({url})
-      this.setData({
-        selected: data.index as number
+    async switchTab(e:any) {
+      await wx.switchTab({
+        url:this.data.list[e.detail as number].pagePath
       })
     }
 
