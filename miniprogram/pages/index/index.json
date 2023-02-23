@@ -1,5 +1,5 @@
 {
   "usingComponents": {
-  
+    "robok-swiper":"../../components/RobokSwiper/RobokSwiper"
   }
 }

@@ -1,2 +1,2 @@
-<!--components/robok-nav-bar/robok-nav-bar.wxml-->
+<!--自定义导航栏-->
 <van-nav-bar custom-class="cover" title-class="title" title="RollBook"/>
