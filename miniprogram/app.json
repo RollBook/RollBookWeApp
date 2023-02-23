@@ -3,7 +3,8 @@
     "pages/index/index",
     "custom-tab-bar/index",
     "pages/bookshelf/bookshelf",
-    "pages/user/user"
+    "pages/user/user",
+    "pages/logs/logs"
   ],
   "tabBar": {
     "custom": true,

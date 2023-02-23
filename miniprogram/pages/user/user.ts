@@ -12,7 +12,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad() {
-
+    //更新tabbar激活状态
+    if(typeof this.getTabBar === "function" && this.getTabBar()) {
+      this.getTabBar().setData({
+        active:2
+      })
+    }
+    
   },
 
   /**
