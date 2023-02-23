@@ -1,6 +1,8 @@
 // app.ts
 App<IAppOption>({
-  globalData: {},
+  globalData: {
+    $api:'http://127.0.0.1:8899/api'
+  },
   onLaunch() {
     // 登录
     wx.login({

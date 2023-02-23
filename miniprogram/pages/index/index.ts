@@ -1,19 +1,25 @@
 // index.ts
+import {request} from '../../utils/request/index'
+
 // 获取应用实例
 const app = getApp<IAppOption>()
 
 Page({
   data: {
-    
+    imgList: [] as string[]
   },
 
-  onLoad() {
-    //更新tabbar激活状态
+  onLoad:async function() {
+    // 更新tabbar激活状态
     if(typeof this.getTabBar === "function" && this.getTabBar()) {
       this.getTabBar().setData({
         active:0
       })
     }
+   
+    // 获取首页轮播url
+    
+    
 
   },
   getUserProfile() {
