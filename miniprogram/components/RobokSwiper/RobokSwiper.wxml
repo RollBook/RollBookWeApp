@@ -1,7 +1,9 @@
 <!-- 自定义图片轮播图 -->
 <swiper indicator-dots="{{indicatorDots}}" indicator-active-color="{{indicatorActiveColor}}" 
     autoplay="{{autoplay}}" interval="{{interval}}">
+
     <swiper-item wx:for="{{items}}" wx:key="index">
       <image src="{{item}}" mode="widthFix" data-index="{{index}}" binderror="imgLoadError"/>
     </swiper-item>
+    
 </swiper>
