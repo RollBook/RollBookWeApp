@@ -5,7 +5,7 @@
 
 <view class="container">
 <!-- 轮播图 -->
-<robok-swiper items="{{['https://img01.yzcdn.cn/vant/cat.jpeg','https://img01.yzcdn.cn/vant/cat.jpeg']}}"/>
+<robok-swiper items="{{imgList}}"/>
 
 
 </view>

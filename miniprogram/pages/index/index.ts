@@ -1,5 +1,5 @@
 // index.ts
-import {request} from '../../utils/request/index'
+import { getIndexSwiper } from "../../api/index/index"
 
 // 获取应用实例
 const app = getApp<IAppOption>()
@@ -18,6 +18,9 @@ Page({
     }
    
     // 获取首页轮播url
+    this.setData({
+      imgList:await (await getIndexSwiper())?.data?.data as string[]
+    })
     
     
 
