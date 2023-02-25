@@ -4,7 +4,8 @@
     "custom-tab-bar/index",
     "pages/bookshelf/bookshelf",
     "pages/user/user",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/sell/sell"
   ],
   "tabBar": {
     "custom": true,

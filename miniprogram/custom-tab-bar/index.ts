@@ -19,15 +19,15 @@ Component({
     list: [{
       pagePath: "../index/index",
       icon:"home-o",
-      text: "首页"
+      text: "首 页"
     }, {
       pagePath: "../bookshelf/bookshelf",
       icon:"tosend",
-      text: "书架"
+      text: "书 架"
     }, {
       pagePath: "../user/user",
       icon:"user-o",
-      text: "用户"
+      text: "用 户"
     }] as {
       pagePath: string,
       icon: string,
