@@ -31,6 +31,7 @@
   "usingComponents": {
     "van-tabbar": "@vant/weapp/tabbar/index",
     "van-tabbar-item": "@vant/weapp/tabbar-item/index",
+    "van-dialog": "@vant/weapp/dialog/index",
     "robok-nav-bar": "./components/RobokNavBar/RobokNavBar"
   },
   "sitemapLocation": "sitemap.json"
