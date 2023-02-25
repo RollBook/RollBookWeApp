@@ -1,4 +1,4 @@
-import {CommonWechatResponse} from './types'
+import { RobokPromise } from './types'
 
 const app = getApp<IAppOption>()
 
@@ -8,17 +8,18 @@ const app = getApp<IAppOption>()
 * @Author: FAll
 * @Date: 2023-02-23 15:58:49
 */
-export const request = (params:WechatMiniprogram.RequestOption<string | Record<string, any> | ArrayBuffer>):Promise<CommonWechatResponse>=>{
-  const baseUrl:string|undefined = app.globalData.$api
-  
-  return new Promise((resolve,reject)=>{
+export async function request<T extends object>(params: WechatMiniprogram.RequestOption<string | Record<string, any> | ArrayBuffer>): RobokPromise<T> {
+
+  const baseUrl: string | undefined = app.globalData.$api
+
+  return new Promise((resolve, reject) => {
     wx.request({
       ...params,
-      url:baseUrl+params.url,
-      success:(result:any)=>{
+      url: baseUrl + params.url,
+      success: (result: any) => {
         resolve(result)
       },
-      fail:(err)=>{
+      fail: (err) => {
         reject(err)
       }
     })
