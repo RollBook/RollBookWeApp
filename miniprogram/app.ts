@@ -7,8 +7,8 @@ App<IAppOption>({
   * 全局变量
   */
   globalData: {
-    $api:"http://127.0.0.1:8899/api",
-    isLogin:false
+    $api: "http://127.0.0.1:8899/api",
+    isLogin: false
   },
 
   /**
@@ -20,47 +20,38 @@ App<IAppOption>({
     // 获取用户登录态
     let openid = wx.getStorageSync("openid")
     let session_key = wx.getStorageSync("session_key")
-    
-    if(!openid&&!session_key) {
+
+    if (!openid && !session_key) {
       // 如果用户本地缓存不存在登录态，则直接执行登录
-      this.globalData.isLogin = userLogin()
+      userLogin()
+      return
     } else {
       // 存在则检查登录态
       wx.request({
-        url:`${this.globalData.$api}/user/check_login`,
-        method:'GET',
-        data:{
+        url: `${this.globalData.$api}/user/check_login`,
+        method: 'GET',
+        data: {
           openid,
           session_key
         },
-        success:()=>{
-          this.globalData.isLogin = true
-          wx.showToast({
-            title:"欢迎使用罗伯克",
-            icon:"success",
-            duration:2000
-          })
-        },
-        // 登录过期，则调用wx登录接口获取code
-        fail:()=>{
-          this.globalData.isLogin = userLogin()
-          if(!this.globalData.isLogin) {
+        success: (res) => {
+          if (res.statusCode === 200) {
+            // 登录态未过期，欢迎使用
+            this.globalData.isLogin = true
             wx.showToast({
-              title:"欢迎使用罗伯克书屋",
-              icon:"success",
-              duration:2000
+              title: "欢迎使用罗伯克",
+              icon: "success",
+              duration: 2000
             })
-          } else {
-            wx.showToast({
-              title:"服务异常",
-              icon:"error",
-              duration:2000
-            })
+          } else {            
+            // 登录过期，调用wx登录接口获取code
+            userLogin()
           }
+
         }
       })
     }
-    
+
 
     /*
     * @Description: 用户登录
@@ -68,30 +59,45 @@ App<IAppOption>({
     * @Date: 2023-02-25 18:46:45
     */
     const $api = this.globalData.$api
-    function userLogin():boolean{
+    function userLogin() {
       wx.login({
-        success: res => {
+        success: (res) => {
           // 调用罗伯克登录接口，用微信官方返回的code进行注册或登录
           wx.request({
-            url:`${$api}/user/login`,
-            method:"POST",
-            data:{
-              code:res.code
+            url: `${$api}/user/login`,
+            method: "POST",
+            data: {
+              code: res.code
             },
-            header:{
+            header: {
               'content-type': 'application/x-www-form-urlencoded'
             },
             // 登录成功后本地缓存用户的openid和session_key
-            success:res=>{
-              const responseData = res.data as CommonWechatResponseData<userSession>
-              wx.setStorageSync("openid",responseData.data.openid)
-              wx.setStorageSync("session_key",responseData.data.session_key)
-              return true
+            success: res => {
+              if (res.statusCode === 200) {
+                const responseData = res.data as CommonWechatResponseData<userSession>
+                wx.setStorageSync("openid", responseData.data.openid)
+                wx.setStorageSync("session_key", responseData.data.session_key)
+                wx.showToast({
+                  title: "欢迎使用罗伯克",
+                  icon: "success",
+                  duration: 2000
+                })
+              } else {
+                // 登录失败
+                wx.showToast({
+                  title: "当前服务异常",
+                  icon: "error",
+                  duration: 2000
+                })
+              }
+
             }
+
           })
         }
       })
-      return false
+
     }
 
   },
