@@ -44,14 +44,13 @@ App<IAppOption>({
               duration: 2000
             })
           } else {            
-            // 登录过期，调用wx登录接口获取code
+            // 登录过期，执行登录
             userLogin()
           }
 
         }
       })
     }
-
 
     /*
     * @Description: 用户登录
@@ -60,6 +59,7 @@ App<IAppOption>({
     */
     const $api = this.globalData.$api
     function userLogin() {
+      // 调用wx登录接口获取code
       wx.login({
         success: (res) => {
           // 调用罗伯克登录接口，用微信官方返回的code进行注册或登录

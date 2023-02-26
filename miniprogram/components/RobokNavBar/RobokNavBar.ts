@@ -4,7 +4,11 @@ Component({
    * 组件的属性列表
    */
   properties: {
-
+    // 是否显示返回按钮
+    isShowBack :{
+      type:Boolean,
+      value:false
+    }
   },
 
   options: {
@@ -21,7 +25,15 @@ Component({
   /**
    * 组件的方法列表
    */
-  methods: {
 
+   /*
+   * @Description: 页面回退
+   * @Author: FAll
+   * @Date: 2023-02-26 09:59:35
+   */
+  methods: {
+    goBack:function() {
+      wx.navigateBack()
+    }
   }
 })

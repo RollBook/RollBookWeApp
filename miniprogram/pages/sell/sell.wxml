@@ -1,2 +1,4 @@
 <!--pages/sell/sell.wxml-->
-<text>pages/sell/sell.wxml</text>
+
+<!-- 导航栏 -->
+<robok-nav-bar isShowBack="{{true}}"/>
