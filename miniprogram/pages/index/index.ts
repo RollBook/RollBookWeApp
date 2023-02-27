@@ -10,6 +10,7 @@ Page({
   },
 
   onLoad:async function() {
+    
     // 更新tabbar激活状态
     if(typeof this.getTabBar === "function" && this.getTabBar()) {
       this.getTabBar().setData({
@@ -34,6 +35,7 @@ Page({
           hasUserInfo: true
         })
       }
+      
     })
   },
   getUserInfo(e: any) {

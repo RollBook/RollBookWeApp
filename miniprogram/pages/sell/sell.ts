@@ -1,18 +1,43 @@
 // pages/sell/sell.ts
+import { getComponent } from "./statepattern/statemachine";
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    steps: [
+      {
+        text: '信息',
+        desc: '完善信息',
+      },
+      {
+        text: '照片',
+        desc: '选择上传书本图片',
+      },
+      {
+        text: '保证',
+        desc: '书本质量保证',
+      },
+      {
+        text: '提交审核',
+        desc: '待审核',
+      },
+    ],
+  },
 
+  pageChange:async function(e:WechatMiniprogram.SwiperChange){
+   console.log(e);
+    
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad() {
-
+    
+    getComponent()
   },
 
   /**

@@ -1,0 +1,3 @@
+<!--components/sell/BookInfo/BookInfo.wxml-->
+<text>components/sell/BookInfo/BookInfo.wxml</text>
+<view>{{a}}</view>
