@@ -20,6 +20,7 @@ App<IAppOption>({
     // 获取用户登录态
     let openid = wx.getStorageSync("openid")
     let session_key = wx.getStorageSync("session_key")
+    const $api = this.globalData.$api
 
     if (!openid && !session_key) {
       // 如果用户本地缓存不存在登录态，则直接执行登录
@@ -28,7 +29,7 @@ App<IAppOption>({
     } else {
       // 存在则检查登录态
       wx.request({
-        url: `${this.globalData.$api}/user/check_login`,
+        url: `${$api}/user/check_login`,
         method: 'GET',
         data: {
           openid,
@@ -57,7 +58,6 @@ App<IAppOption>({
     * @Author: FAll
     * @Date: 2023-02-25 18:46:45
     */
-    const $api = this.globalData.$api
     function userLogin() {
       // 调用wx登录接口获取code
       wx.login({
