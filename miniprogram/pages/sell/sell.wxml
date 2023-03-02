@@ -1,0 +1,32 @@
+<!--pages/sell/sell.wxml-->
+
+<view class="sell-container">
+  <!-- 导航栏 -->
+  <robok-nav-bar isShowBack="{{true}}"/>
+
+  <!-- 步骤条 -->
+  <van-steps steps="{{ steps }}" active="{{ active }}" 
+  active-color="var(--theme-color)"/>
+
+  <!-- 轮播页面 -->
+  <swiper bindchange="pageChange" class="swiper-page"
+  wx:key="index">
+  
+    <swiper-item wx:for="{{4}}" wx:key="index">
+      <!-- 书本信息 -->
+      <seller-info id="sellerinfo" wx:if="{{item === 0}}" />
+
+      <!-- 书本图片上传 -->
+      <book-img id="bookimg" wx:if="{{item === 1}}" />
+
+      <!-- 书本质量 -->
+      <book-status id="bookstatus" wx:if="{{item === 2}}" />
+
+      <!-- 书本提交 -->
+      <book-commit id="bookcommit" wx:if="{{item === 3}}" />
+      
+    </swiper-item>
+    
+  </swiper>
+
+</view>

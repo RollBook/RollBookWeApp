@@ -1,0 +1,51 @@
+<!--书本信息-->
+<view class="container">
+
+  <van-cell-group>
+    <!-- 用户昵称 -->
+    <van-field
+      required
+      label="用户昵称"
+      id="nickName"
+      extra-event-params = "{{true}}"
+      bind:change = "setSellerInfo"
+      value="{{ sellerInfo.nickName }}"
+      placeholder="( 必填 )"
+    />
+
+    <!-- 学校 -->
+    <van-field
+      required
+      label="学校"
+      id="school"
+      extra-event-params = "{{true}}"
+      bind:change="setSellerInfo"
+      value="{{ sellerInfo.school }}"
+      placeholder="( 必填 )"
+    />
+
+    <!-- 地址 -->
+    <van-cell 
+    required
+    title="收获地址">
+      <van-button type="primary" 
+        round size="mini" plain
+        bindtap="getAddress">
+        获取地址
+      </van-button>
+    </van-cell>
+
+    <!-- 手机号 -->
+    <van-cell 
+    required
+    title="手机号">
+      <van-button type="primary" round size="mini" plain>
+        获取号码
+      </van-button>
+    </van-cell>
+
+  </van-cell-group>
+  
+  <!-- 温馨提示 -->
+  <robok-text>您的信息将用于罗伯克平台书本交易业务，感谢您对平台的支持</robok-text>
+</view>

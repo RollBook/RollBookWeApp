@@ -1,5 +1,5 @@
 // logs.ts
-import { formatTime } from '../../utils/dateUtil'
+import { formatTime } from '../../utils/dateUtils/index'
 
 Page({
   data: {

@@ -4,8 +4,29 @@
 <robok-nav-bar/>
 
 <view class="container">
-<!-- 轮播图 -->
-<robok-swiper items="{{['https://img01.yzcdn.cn/vant/cat.jpeg','https://img01.yzcdn.cn/vant/cat.jpeg']}}"/>
 
+  <!-- 轮播图 -->
+  <robok-swiper items="{{imgList}}"/>
+
+  <!-- 功能模块 -->
+  <van-grid column-num="2" custom-class="modules"
+   gutter="20" clickable="true" border="{{false}}">
+      <!-- 商城 -->
+      <van-grid-item content-class="module-content" 
+      text-class="module-text" icon="shop-o" text="商城" />
+
+      <!-- 卖出 -->
+      <van-grid-item content-class="module-content" 
+        text-class="module-text" icon="gold-coin-o" 
+        text="卖出" url="/pages/sell/sell"/>
+
+      <!-- 存取 -->
+      <van-grid-item content-class="module-content" 
+      text-class="module-text" icon="gift-o" text="存取" />
+
+      <!-- 敬请期待 -->
+      <van-grid-item content-class="module-content" 
+      text-class="module-text" icon="apps-o" text="敬请期待" />
+  </van-grid>
 
 </view>

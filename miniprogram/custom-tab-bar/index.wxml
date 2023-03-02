@@ -1,8 +1,8 @@
 <!--custom-tab-bar/index.wxml-->
-<!-- 自定义选项卡栏 -->
+<!-- 自定义选项卡栏，这个页面只有放在和app.ts同层级目录才可以被小程序检测到 -->
 <van-tabbar
 active="{{ active }}"
-active-color="#26ff8e"
+active-color="#38b48b"
 bind:change="switchTab"
 >
   <van-tabbar-item wx:for="{{list}}" wx:key="index" icon="{{item.icon}}">

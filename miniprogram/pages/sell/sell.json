@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "van-steps": "@vant/weapp/steps/index",
+    "seller-info": "../../components/sell/SellerInfo/SellerInfo",
+    "book-img": "../../components/sell/BookImg/BookImg",
+    "book-status": "../../components/sell/BookStatus/BookStatus",
+    "book-commit": "../../components/sell/BookCommit/BookCommit"
+  }
+}
