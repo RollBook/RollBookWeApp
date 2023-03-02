@@ -5,6 +5,8 @@
     <!-- 用户昵称 -->
     <van-field
       required
+      clearable
+      input-align = "right"
       label="用户昵称"
       id="nickName"
       extra-event-params = "{{true}}"
@@ -16,6 +18,8 @@
     <!-- 学校 -->
     <van-field
       required
+      clearable
+      input-align = "right"
       label="学校"
       id="school"
       extra-event-params = "{{true}}"
@@ -30,18 +34,22 @@
     title="收获地址">
       <van-button type="primary" 
         round size="mini" plain
-        bindtap="getAddress">
+        bindtap="getAddress" wx:if="{{sellerInfo.address === ''}}">
         获取地址
       </van-button>
+      <view wx:else> {{sellerInfo.address}} </view>
     </van-cell>
 
     <!-- 手机号 -->
     <van-cell 
     required
     title="手机号">
-      <van-button type="primary" round size="mini" plain>
+      <van-button type="primary" plain round size="mini" 
+       open-type="getPhoneNumber" bindgetphonenumber="getPhoneNum"
+       wx:if="{{sellerInfo.phoneNum === ''}}">
         获取号码
       </van-button>
+      <view wx:else> {{sellerInfo.phoneNum}} </view>
     </van-cell>
 
   </van-cell-group>
