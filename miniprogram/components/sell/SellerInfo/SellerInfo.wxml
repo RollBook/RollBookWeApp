@@ -7,8 +7,9 @@
       required
       label="用户昵称"
       id="nickName"
-      bind:input = "setSellerInfo"
-      model:value="{{ sellerInfo.nickName }}"
+      extra-event-params = "{{true}}"
+      bind:change = "setSellerInfo"
+      value="{{ sellerInfo.nickName }}"
       placeholder="( 必填 )"
     />
 
@@ -16,9 +17,11 @@
     <van-field
       required
       label="学校"
-      value="{{ value }}"
+      id="school"
+      extra-event-params = "{{true}}"
+      bind:change="setSellerInfo"
+      value="{{ sellerInfo.school }}"
       placeholder="( 必填 )"
-      bind:change="onChange"
     />
 
     <!-- 地址 -->
