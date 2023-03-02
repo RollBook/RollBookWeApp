@@ -39,5 +39,10 @@
     "robok-nav-bar": "./components/RobokNavBar/RobokNavBar",
     "robok-text":"./components/RobokText/RobokText"
   },
+  "requiredPrivateInfos": [
+    "chooseLocation",
+    "choosePoi",
+    "chooseAddress"
+  ],
   "sitemapLocation": "sitemap.json"
 }

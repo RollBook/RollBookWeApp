@@ -14,7 +14,7 @@
   
     <swiper-item wx:for="{{4}}" wx:key="index">
       <!-- 书本信息 -->
-      <seller-info id="bookinfo" wx:if="{{item === 0}}" />
+      <seller-info id="sellerinfo" wx:if="{{item === 0}}" />
 
       <!-- 书本图片上传 -->
       <book-img id="bookimg" wx:if="{{item === 1}}" />

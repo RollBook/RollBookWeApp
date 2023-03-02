@@ -1,8 +1,6 @@
 export function getComponent() {
  setTimeout(()=>{
-  getCurrentPages().pop()?.selectComponent('#bookinfo').setData({
-    a:false
-  })
+  getCurrentPages().pop()?.selectComponent('#sellerinfo')
  },1000)
   
 }

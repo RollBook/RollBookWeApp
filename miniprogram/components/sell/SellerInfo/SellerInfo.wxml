@@ -28,7 +28,9 @@
     <van-cell 
     required
     title="收获地址">
-      <van-button type="primary" round size="mini" plain>
+      <van-button type="primary" 
+        round size="mini" plain
+        bindtap="getAddress">
         获取地址
       </van-button>
     </van-cell>

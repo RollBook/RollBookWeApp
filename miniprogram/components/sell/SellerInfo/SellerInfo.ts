@@ -14,6 +14,9 @@ Component({
    * 组件的初始数据
    */
   data: {
+    // 地区数据
+
+    // 卖家信息
     sellerInfo:{
       nickName:'',
       school  :'',
@@ -26,11 +29,11 @@ Component({
    * 组件的方法列表
    */
   methods: {
-    // 设定卖家信息
+    /**
+    * 设定卖家信息
+    */
     setSellerInfo(e:WechatMiniprogram.Input){
-      console.log(e);
-      
-      // 防抖
+      // 页面防抖
       if(timer) {
         clearTimeout(timer)
       }
@@ -53,9 +56,25 @@ Component({
         this.setData({
           sellerInfo:temp
         })
-        console.log(this.data.sellerInfo);
+      }, 500)
+    },
+
+    /**
+    * 获取地址信息
+    */
+   getAddress() {
+    wx.chooseLocation({
+      success:(res)=>{
+        console.log(res);
+      },
+      fail:(err)=>{
+        console.log(err);
         
-      },500)
-    }
+      }
+    })
+    
+   }
+
+
   }
 })

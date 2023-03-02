@@ -28,7 +28,7 @@ Page({
   },
 
   pageChange:async function(e:WechatMiniprogram.SwiperChange){
-   console.log(e);
+    getComponent()
     
   },
 
