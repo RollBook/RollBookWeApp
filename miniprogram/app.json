@@ -33,7 +33,11 @@
     "van-tabbar": "@vant/weapp/tabbar/index",
     "van-tabbar-item": "@vant/weapp/tabbar-item/index",
     "van-dialog": "@vant/weapp/dialog/index",
-    "robok-nav-bar": "./components/RobokNavBar/RobokNavBar"
+    "van-cell": "@vant/weapp/cell/index",
+    "van-cell-group": "@vant/weapp/cell-group/index",
+    "van-button": "@vant/weapp/button/index",
+    "robok-nav-bar": "./components/RobokNavBar/RobokNavBar",
+    "robok-text":"./components/RobokText/RobokText"
   },
   "sitemapLocation": "sitemap.json"
 }

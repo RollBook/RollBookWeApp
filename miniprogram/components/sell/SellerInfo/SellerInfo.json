@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {
+    "van-field": "@vant/weapp/field/index",
+    "van-cascader": "@vant/weapp/cascader/index"
+  }
+}

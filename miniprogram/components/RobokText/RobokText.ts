@@ -1,13 +1,15 @@
-// components/sell/BookInfo/BookInfo.ts
+// components/RobokText/RobokText.ts
 Component({
+
+  options:{
+    styleIsolation: 'isolated'
+  },
+
   /**
    * 组件的属性列表
    */
   properties: {
-    a:{
-      type:Boolean,
-      value:true
-    }
+    
   },
 
   /**

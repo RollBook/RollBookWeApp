@@ -1,0 +1,4 @@
+<!--components/RobokText/RobokText.wxml-->
+<view class="text">
+  <slot></slot>
+</view>

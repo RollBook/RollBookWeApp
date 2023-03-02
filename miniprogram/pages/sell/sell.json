@@ -1,7 +1,7 @@
 {
   "usingComponents": {
     "van-steps": "@vant/weapp/steps/index",
-    "book-info": "../../components/sell/BookInfo/BookInfo",
+    "seller-info": "../../components/sell/SellerInfo/SellerInfo",
     "book-img": "../../components/sell/BookImg/BookImg",
     "book-status": "../../components/sell/BookStatus/BookStatus",
     "book-commit": "../../components/sell/BookCommit/BookCommit"
