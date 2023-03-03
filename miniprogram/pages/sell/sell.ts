@@ -1,5 +1,5 @@
 // pages/sell/sell.ts
-import { getComponent } from "./statepattern/statemachine";
+import SellerStateMachine from "./statepattern/statemachine";
 
 Page({
 
@@ -7,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    /** 步骤条 */
     steps: [
       {
         text: '信息',
@@ -25,19 +26,47 @@ Page({
         desc: '待审核',
       },
     ],
+    /** 页面状态机 */
+    machine: undefined as SellerStateMachine|undefined,
+    /** 当前轮播索引 */
+    swiperIndex: 0
   },
 
-  pageChange:async function(e:WechatMiniprogram.SwiperChange){
-    getComponent()
-    
+  /*
+  * @Description: 轮播页面切换处理器
+  * @Param: e 轮播切换事件对象
+  * @Author: FAll
+  * @Date: 2023-03-03 15:08:52
+  */
+  pageChange:async function(e:WechatMiniprogram.SwiperChange) {
+    if(e.detail.current - this.data.swiperIndex > 0) {
+      // 用户想要进入下一步
+      const state = this.data.machine?.getState()
+      if(state?.canIContinue()) {
+        // 满足条件，进入下一步
+      } else {
+        // 条件不满足，退回当前页
+        this.setData({
+          swiperIndex:this.data.swiperIndex
+        })
+        // TODO: 模态框提示条件不满足
+
+      }
+      
+    } else {
+      // 用户想要退回上一步
+
+      
+    }
+    // const state = this.data.machine?.getState()
+    // state?.canIContinue()
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad() {
-    
-    getComponent()
+    this.data.machine = new SellerStateMachine()
   },
 
   /**

@@ -10,7 +10,7 @@
 
   <!-- 轮播页面 -->
   <swiper bindchange="pageChange" class="swiper-page"
-  wx:key="index">
+  wx:key="index" current="{{swiperIndex}}">
   
     <swiper-item wx:for="{{4}}" wx:key="index">
       <!-- 书本信息 -->
