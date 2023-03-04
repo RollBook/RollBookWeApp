@@ -1,3 +1,8 @@
+// 小程序请求
+export interface CommonWechatRequest extends WechatMiniprogram.RequestOption<string | Record<string, any> | ArrayBuffer>{
+  auth?:boolean
+}
+
 // 小程序响应
 export interface CommonWechatResponse<T> {
   data: CommonWechatResponseData<T>
@@ -13,5 +18,5 @@ export interface CommonWechatResponseData<T> {
   status: number
 }
 
-// Promise封装小程序响应
+// 小程序响应Promise
 export type RobokPromise<T = any> = Promise<CommonWechatResponse<T>>

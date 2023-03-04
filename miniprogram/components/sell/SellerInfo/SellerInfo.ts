@@ -37,20 +37,20 @@ Component({
     setSellerInfo(e:WechatMiniprogram.Input){
       // 页面防抖
       if(timer) {
-        clearTimeout(timer)
+        clearTimeout(timer);
       }
       timer = setTimeout(()=>{
         // 初始化临时对象
         let temp:SellerInfo; 
-        temp = this.data.sellerInfo
+        temp = this.data.sellerInfo;
         // 修改临时对象
         switch(e.currentTarget.id) {
           case 'nickName': {
-            temp.nickName =  e.detail.value
+            temp.nickName =  e.detail.value;
             break;
           }
           case "school": {
-            temp.school = e.detail.value
+            temp.school = e.detail.value;
             break;
           }
         }
@@ -58,7 +58,7 @@ Component({
         this.setData({
           sellerInfo:temp
         })
-      }, 500)
+      }, 500);
     },
 
     /*
@@ -69,19 +69,19 @@ Component({
    getAddress() {
     // 初始化临时对象
     let temp:SellerInfo; 
-    temp = this.data.sellerInfo
+    temp = this.data.sellerInfo;
     // 打开地图选择位置
     wx.chooseLocation({
       success:(res)=>{
-        temp.address = res.address
+        temp.address = res.address;
         this.setData({
           sellerInfo: temp
-        })
+        });
       },
       fail:(err)=>{
         console.log(err);
       }
-    })
+    });
    },
 
    /*
@@ -94,18 +94,21 @@ Component({
 
     // 用户取消获取
     if(e.detail.errMsg.match('fail')) {
-      return
+      return;
     }
 
     // 初始化临时对象
     let temp:SellerInfo; 
-    temp = this.data.sellerInfo
+    temp = this.data.sellerInfo;
     // 请求获取用户手机号码
-    let res = await getPhoneNumber(e.detail.code)
-    temp.phoneNum = res.data.data as string
+    let res = await getPhoneNumber(e.detail.code);
+    if(!res.data.data){
+      return;
+    }
+    temp.phoneNum = res.data.data.valueOf();
     this.setData({
       sellerInfo:temp
-    })
+    });
   }
 
   } 

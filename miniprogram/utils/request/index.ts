@@ -1,4 +1,4 @@
-import { RobokPromise } from './types'
+import { RobokPromise,CommonWechatRequest } from './types'
 
 const app = getApp<IAppOption>()
 
@@ -9,14 +9,14 @@ const app = getApp<IAppOption>()
 * @Author: FAll
 * @Date: 2023-02-23 15:58:49
 */
-export async function request<T extends object>(params: WechatMiniprogram.RequestOption<string | Record<string, any> | ArrayBuffer>,auth?:boolean): RobokPromise<T> {
+export async function request<T extends object>(requestparams:CommonWechatRequest): RobokPromise<T> {
 
   const baseUrl: string | undefined = app.globalData.$api
 
-  if(auth) {
+  if(requestparams.auth) {
     let openid = wx.getStorageSync('openid')
     let session_key = wx.getStorageSync('session_key')
-    params.header = {
+    requestparams.header = {
       'content-type': 'application/x-www-form-urlencoded',
       openid,
       session_key
@@ -24,8 +24,8 @@ export async function request<T extends object>(params: WechatMiniprogram.Reques
   }
   return new Promise((resolve, reject) => {
     wx.request({
-      ...params,
-      url: baseUrl + params.url,
+      ...requestparams,
+      url: baseUrl + requestparams.url,
       success: (result: any) => {
         resolve(result)
       },

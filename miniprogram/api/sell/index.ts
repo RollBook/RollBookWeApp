@@ -10,8 +10,8 @@ import { RobokPromise } from "../../utils/request/types";
 export async function getPhoneNumber(code:string):RobokPromise<String> {
   let openid:string = wx.getStorageSync('openid')
 
-  return await request({url:"/user/code2phone_num",method:"POST",data:{
+  return await request({url:"/user/code2phone_num",method:"POST",auth:true,data:{
     openid,
     code
-  }},true)
+  }})
 }

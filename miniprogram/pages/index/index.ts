@@ -2,7 +2,7 @@
 import { getIndexSwiper } from "../../api/index/index"
 
 // 获取应用实例
-const app = getApp<IAppOption>()
+const app = getApp<IAppOption>();
 
 Page({
   data: {
@@ -15,14 +15,14 @@ Page({
     if(typeof this.getTabBar === "function" && this.getTabBar()) {
       this.getTabBar().setData({
         active:0
-      })
+      });
     }
    
     // 获取并设置首页轮播url
     // TODO: 本地缓存轮播图url
     this.setData({
       imgList: (await getIndexSwiper())?.data?.data
-    })
+    });
     
   },
   getUserProfile() {
@@ -33,17 +33,10 @@ Page({
         this.setData({
           userInfo: res.userInfo,
           hasUserInfo: true
-        })
+        });
       }
       
-    })
+    });
   },
-  getUserInfo(e: any) {
-    // 不推荐使用getUserInfo获取用户信息，预计自2021年4月13日起，getUserInfo将不再弹出弹窗，并直接返回匿名的用户个人信息
-    console.log(e)
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
-    })
-  }
+
 })

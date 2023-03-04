@@ -39,11 +39,15 @@ Page({
   * @Date: 2023-03-03 15:08:52
   */
   pageChange:async function(e:WechatMiniprogram.SwiperChange) {
+
+    const state = this.data.machine?.getState();
+    
     if(e.detail.current - this.data.swiperIndex > 0) {
       // 用户想要进入下一步
-      const state = this.data.machine?.getState()
       if(state?.canIContinue()) {
         // 满足条件，进入下一步
+        state.handleContinue();
+        this.data.swiperIndex = e.detail.current;
       } else {
         // 条件不满足，退回当前页
         this.setData({
@@ -52,14 +56,11 @@ Page({
         // TODO: 模态框提示条件不满足
 
       }
-      
     } else {
       // 用户想要退回上一步
-
-      
+      state?.handleBackwards();
+      this.data.swiperIndex = e.detail.current;
     }
-    // const state = this.data.machine?.getState()
-    // state?.canIContinue()
   },
 
   /**
