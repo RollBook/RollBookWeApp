@@ -17,10 +17,12 @@ Component({
   data: {
     // 卖家信息
     sellerInfo:{
-      nickName:'',
-      school  :'',
-      address :'',
-      phoneNum:''
+      nickName  :'',
+      school    :'',
+      address   :'',
+      phoneNum  :'',
+      longitude :0,
+      latitude  :0
     } as SellerInfo,
   },
 
@@ -74,6 +76,8 @@ Component({
     wx.chooseLocation({
       success:(res)=>{
         temp.address = res.address;
+        temp.latitude = res.latitude;
+        temp.longitude = res.longitude;
         this.setData({
           sellerInfo: temp
         });

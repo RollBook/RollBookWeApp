@@ -1,5 +1,6 @@
 import { request } from "../../utils/request/index";
 import { RobokPromise } from "../../utils/request/types";
+import { SellerInfo } from "./types";
 
 /*
 * @Description: 获取用户手机号
@@ -13,5 +14,12 @@ export async function getPhoneNumber(code:string):RobokPromise<String> {
   return await request({url:"/user/code2phone_num",method:"POST",auth:true,data:{
     openid,
     code
+  }})
+}
+
+export async function setSellerInfo(info:SellerInfo) {
+  
+  return await request({url:"/seller/update_seller_info",method:"POST",auth:true,data:{
+    ...info
   }})
 }
