@@ -17,9 +17,9 @@ export async function getPhoneNumber(code:string):RobokPromise<String> {
   }})
 }
 
-export async function setSellerInfo(info:SellerInfo) {
+export async function setSellerInfo(info:SellerInfo):RobokPromise<String> {
   
-  return await request({url:"/seller/update_seller_info",method:"POST",auth:true,data:{
+  return await request({url:"/seller/update_seller_info",method:"POST",auth:true,json:true,data:{
     ...info
   }})
 }

@@ -1,4 +1,7 @@
 import { State } from "../state";
+import { setSellerInfo } from "../../../../api/sell/index";
+import { RobokPromise } from "miniprogram/utils/request/types";
+import { SellerInfo } from "miniprogram/api/sell/types";
 
 /**
 * 卖家信息状态
@@ -32,9 +35,9 @@ export default class StateSellerInfo implements State {
     return isInfoComplete;
   }
 
-  handleContinue(): void {
+  async handleContinue() {
     // TODO: 将卖家信息发送至服务器，并在本地缓存
-
+    await setSellerInfo(this.component.data.sellerInfo)
   }
 
   handleBackwards(): void {

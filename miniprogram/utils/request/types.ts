@@ -1,6 +1,7 @@
 /** 小程序请求 */
 export interface CommonWechatRequest extends WechatMiniprogram.RequestOption<string | Record<string, any> | ArrayBuffer>{
-  auth?:boolean
+  auth?:boolean,
+  json?:boolean
 }
 
 /** 小程序响应 */

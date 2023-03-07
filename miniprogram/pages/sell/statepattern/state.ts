@@ -1,3 +1,5 @@
+import { CommonWechatResponse, RobokPromise } from "miniprogram/utils/request/types";
+
 /**
 * 抽象状态
 */
@@ -15,7 +17,7 @@ export interface State {
   * @Author: FAll
   * @Date: 2023-03-03 15:24:41
   */
-  handleContinue():void;
+  handleContinue():Promise<void>;
 
   /*
   * @Description: 回到上一步的后续处理
