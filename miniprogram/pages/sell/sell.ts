@@ -1,4 +1,5 @@
 // pages/sell/sell.ts
+import { robokShowModal } from "../../api/index";
 import SellerStateMachine from "./statepattern/statemachine";
 
 Page({
@@ -49,12 +50,15 @@ Page({
         state.handleContinue();
         this.data.swiperIndex = e.detail.current;
       } else {
-        // 条件不满足，退回当前页
+        // 不满足条件，退回当前页
         this.setData({
           swiperIndex:this.data.swiperIndex
         })
-        // TODO: 模态框提示条件不满足
-
+        // 模态框提示条件不满足
+        robokShowModal({
+          content:'请补全信息 (=￣▽￣=)'
+        })
+        
       }
     } else {
       // 用户想要退回上一步

@@ -9,7 +9,7 @@ export async function robokShowModal<T extends WechatMiniprogram.ShowModalOption
   option?: T) {
   wx.showModal({
     title: "罗伯克书屋",
-    confirmColor: "#26ff8e",
+    confirmColor: "#38b48b",
     ...option
   })
 }
