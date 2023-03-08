@@ -1,9 +1,9 @@
-/**
-* 卖家信息
-*/
+/** 卖家信息 */
 export interface SellerInfo {
-    nickName: string
-    school  : string
-    address : string
-    phoneNum: string
+    nickName  : string
+    school    : string
+    phoneNum  : string
+    address   : string
+    latitude  : number
+    longitude : number
 }
