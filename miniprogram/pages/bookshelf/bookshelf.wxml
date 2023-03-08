@@ -2,4 +2,16 @@
 
 <!-- 导航栏 -->
 <robok-nav-bar/>
-书架
+<van-tabs active="{{ active }}"color="#38b48b" bind:change="onChange">
+  <van-tab title="卖书书架">
+    <van-card
+        num="2"
+        tag="标签"
+        price="10.00"
+        desc="描述信息"
+        title="商品标题"
+        thumb="{{ imageURL }}"
+    ></van-card>
+  </van-tab>
+  <van-tab title="买书书架">内容 2</van-tab>
+</van-tabs>

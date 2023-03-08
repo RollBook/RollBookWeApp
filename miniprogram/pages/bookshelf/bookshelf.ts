@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    active: 0
   },
 
   /**
@@ -18,6 +18,12 @@ Page({
         active:1
       })
     }
+  },
+  onChange(event:any) {
+    wx.showToast({
+      title: `切换到标签 ${event.detail.index + 1}`,
+      icon: 'none'
+    });
   },
 
   /**
