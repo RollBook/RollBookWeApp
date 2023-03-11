@@ -2,16 +2,43 @@
 
 <!-- 导航栏 -->
 <robok-nav-bar/>
-<van-tabs active="{{ active }}"color="#38b48b" bind:change="onChange">
+
+<!-- 标签 -->
+<van-tabs active="{{ active }}"color="var(--theme-color)" bind:change="onChange">
+
+<!-- 书本标签 -->
   <van-tab title="卖书书架">
-    <van-card
-        num="2"
+    <view  wx:for="{{bookList}}" wx:key="index">
+      <van-card
         tag="标签"
-        price="10.00"
-        desc="描述信息"
-        title="商品标题"
-        thumb="{{ imageURL }}"
-    ></van-card>
+        price="{{item.price}}"
+        desc="{{item.description}}"
+        title="{{item.bookName}}"
+        thumb="{{ item.url1 }}"
+        custom-class = "cover"
+      >
+        <view slot="footer">
+          <van-button round size="mini">下 架</van-button>
+          <van-button round size="mini">删 除</van-button>
+       </view>
+      </van-card>
+    </view>
   </van-tab>
-  <van-tab title="买书书架">内容 2</van-tab>
+  <van-tab title="买书书架">
+    <view  wx:for="{{orderList}}" wx:key="index">
+      <van-card
+        tag="标签"
+        price="{{item.book.price}}"
+        desc="{{item.book.description}}"
+        title="{{item.book.bookName}}"
+        thumb="{{ item.book.url1 }}"
+        custom-class = "cover"
+      >
+        <view slot="footer">
+          <van-button round size="mini">详 情</van-button>
+          <van-button round size="mini">删 除</van-button>
+       </view>
+      </van-card>
+    </view>
+  </van-tab>
 </van-tabs>
