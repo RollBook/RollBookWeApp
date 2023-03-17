@@ -37,7 +37,9 @@
     "van-cell-group": "@vant/weapp/cell-group/index",
     "van-button": "@vant/weapp/button/index",
     "robok-nav-bar": "./components/RobokNavBar/RobokNavBar",
-    "robok-text":"./components/RobokText/RobokText"
+    "robok-text": "./components/RobokText/RobokText",
+    "van-tabs": "@vant/weapp/tabs/index",
+    "van-tab": "@vant/weapp/tab/index"
   },
   "requiredPrivateInfos": [
     "chooseLocation",
