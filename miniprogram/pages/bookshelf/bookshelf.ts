@@ -1,5 +1,5 @@
 // pages/bookshelf/bookshelf.ts
-import { changeEvent } from "miniprogram/api/book/types";
+import { ChangeEvent } from "miniprogram/api/book/types";
 import { getSellBook } from "../../api/book/index";
 import { getOrder } from "../../api/order/index"
 Page({
@@ -30,7 +30,7 @@ Page({
   },
 
   //切换书架
-   onChange:async function(event:changeEvent) {
+   onChange:async function(event:ChangeEvent) {
     let tag:string = ""
     if(event.detail.index===0) {
       tag = "卖书书架";

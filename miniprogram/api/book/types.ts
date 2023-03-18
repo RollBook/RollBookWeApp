@@ -21,6 +21,6 @@ interface DetailInfo{
 
 }
 
-export interface changeEvent extends DetailInfo{
+export interface ChangeEvent extends DetailInfo{
   detail : DetailInfo
 }

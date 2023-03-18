@@ -3,6 +3,14 @@ import { SellerInfo } from "../../../api/sell/types";
 import { getPhoneNumber } from "../../../api/sell/index";
 
 let timer:number|undefined = undefined; // 定时器序号
+let tempSellerInfo:SellerInfo = {       // 临时对象
+  nickName  :'',
+  school    :'',
+  address   :'',
+  phoneNum  :'',
+  longitude :0,
+  latitude  :0
+};
 Component({
   /**
    * 组件的属性列表
@@ -23,7 +31,7 @@ Component({
       phoneNum  :'',
       longitude :0,
       latitude  :0
-    } as SellerInfo,
+    } as SellerInfo
   },
 
   /**
@@ -37,28 +45,25 @@ Component({
     * @Date: 2023-03-02 16:25:22
     */
     setSellerInfo(e:WechatMiniprogram.Input){
+      // 修改临时对象
+      switch(e.currentTarget.id) {
+        case 'nickName': {
+          tempSellerInfo.nickName =  e.detail.value;
+          break;
+        }
+        case "school": {
+          tempSellerInfo.school = e.detail.value;
+          break;
+        }
+      }
       // 页面防抖
       if(timer) {
         clearTimeout(timer);
       }
       timer = setTimeout(()=>{
-        // 初始化临时对象
-        let temp:SellerInfo; 
-        temp = this.data.sellerInfo;
-        // 修改临时对象
-        switch(e.currentTarget.id) {
-          case 'nickName': {
-            temp.nickName =  e.detail.value;
-            break;
-          }
-          case "school": {
-            temp.school = e.detail.value;
-            break;
-          }
-        }
         // 赋值给卖家信息
         this.setData({
-          sellerInfo:temp
+          sellerInfo:tempSellerInfo
         })
       }, 500);
     },

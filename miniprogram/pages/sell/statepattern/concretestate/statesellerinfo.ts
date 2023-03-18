@@ -1,7 +1,5 @@
 import { State } from "../state";
 import { setSellerInfo } from "../../../../api/sell/index";
-import { RobokPromise } from "miniprogram/utils/request/types";
-import { SellerInfo } from "miniprogram/api/sell/types";
 
 /**
 * 卖家信息状态
@@ -25,7 +23,7 @@ export default class StateSellerInfo implements State {
     // 判断信息是否完善
     const sellerInfo = this.component.data.sellerInfo;
     let isInfoComplete = true;
-
+     
     for (const key in sellerInfo) {
       if (Object.prototype.hasOwnProperty.call(sellerInfo, key) && (!sellerInfo[key])) {
         isInfoComplete = false;

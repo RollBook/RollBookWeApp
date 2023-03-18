@@ -1,4 +1,4 @@
-import { CommonWechatResponse, RobokPromise } from "miniprogram/utils/request/types";
+
 
 /**
 * 抽象状态
