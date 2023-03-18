@@ -1,6 +1,6 @@
 // pages/bookshelf/bookshelf.ts
 import { ChangeEvent } from "miniprogram/api/book/types";
-import { getSellBook } from "../../api/book/index";
+import { getSellBook } from "../../api/order/index";
 import { getOrder } from "../../api/order/index"
 Page({
 
@@ -23,8 +23,9 @@ Page({
         active:1
       })
     }
+    const ret = (await getSellBook())?.data?.data
     this.setData({
-      bookList: (await getSellBook())?.data?.data
+      bookList: ret?ret:undefined
     })
     
   },
