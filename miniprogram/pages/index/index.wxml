@@ -4,7 +4,6 @@
 <robok-nav-bar/>
 
 <view class="container">
-
   <!-- 轮播图 -->
   <robok-swiper items="{{imgList}}"/>
 

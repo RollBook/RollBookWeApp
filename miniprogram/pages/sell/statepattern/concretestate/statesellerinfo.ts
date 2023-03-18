@@ -1,7 +1,7 @@
 import { State } from "../state";
 import { setSellerInfo } from "../../../../api/sell/index";
-import { RobokPromise } from "miniprogram/utils/request/types";
-import { SellerInfo } from "miniprogram/api/sell/types";
+import { SellerInfo } from "../../../../api/sell/types";
+import { tempSellerInfo } from "../../../../components/sell/SellerInfo/SellerInfo";
 
 /**
 * 卖家信息状态
@@ -16,6 +16,28 @@ export default class StateSellerInfo implements State {
   constructor() {
     // 初始化组件实例
     this.component = getCurrentPages().pop()?.selectComponent('#sellerinfo') as WechatMiniprogram.Component.TrivialInstance;
+    // 从缓存中获取卖家信息
+    const storedSellerInfo = wx.getStorageSync("sellerInfo") as SellerInfo;
+    // 如果缓存信息不存在，则向服务器请求买家信息
+    if(!storedSellerInfo) {
+      let openid = wx.getStorageSync('openid');
+      let session_key = wx.getStorageSync('session_key');
+
+      wx.request({
+        url: getApp<IAppOption>().globalData.$api+"/seller/get_seller_info",
+        method: "GET",
+        header:{
+          openid,
+          session_key
+        },
+        success:(res:any)=>{
+          this.initSellerInfoAndTempInfo(tempSellerInfo,res.data.data);
+        }
+      })
+    } else {
+      this.initSellerInfoAndTempInfo(tempSellerInfo,storedSellerInfo);
+    }
+
   }
 
   canIContinue(): boolean {
@@ -25,7 +47,7 @@ export default class StateSellerInfo implements State {
     // 判断信息是否完善
     const sellerInfo = this.component.data.sellerInfo;
     let isInfoComplete = true;
-
+    
     for (const key in sellerInfo) {
       if (Object.prototype.hasOwnProperty.call(sellerInfo, key) && (!sellerInfo[key])) {
         isInfoComplete = false;
@@ -36,13 +58,36 @@ export default class StateSellerInfo implements State {
   }
 
   async handleContinue() {
-    // TODO: 将卖家信息发送至服务器，并在本地缓存
-    await setSellerInfo(this.component.data.sellerInfo)
+    // 将卖家信息发送至服务器，并在本地缓存
+    await setSellerInfo(this.component.data.sellerInfo);
+    wx.setStorageSync("sellerInfo",this.component.data.sellerInfo);
+
   }
 
   handleBackwards(): void {
     // 更新组件实例
     this.component = getCurrentPages().pop()?.selectComponent('#sellerinfo') as WechatMiniprogram.Component.TrivialInstance;
   }
+
+    /*
+  * @Description: 初始化卖家对象和临时对象
+  * @Param: tempSellerInfo 临时对象
+  * @Param: tempSellerInfo 本地/远程 存储对象
+  * @Author: FAll
+  * @Date: 2023-03-18 17:57:01
+  */
+ initSellerInfoAndTempInfo(tempSellerInfo:SellerInfo,storedSellerInfo:SellerInfo) {
+  // 初始化临时卖家对象
+  for (const key in storedSellerInfo) {
+    if (Object.prototype.hasOwnProperty.call(storedSellerInfo, key)) {
+      tempSellerInfo[key] = storedSellerInfo[key];
+    }
+  }
+  // 初始化卖家对象
+  this.component.setData({
+    sellerInfo:storedSellerInfo
+  });
+  
+}
 
 }

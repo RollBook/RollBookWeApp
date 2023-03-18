@@ -17,9 +17,15 @@ export async function getPhoneNumber(code:string):RobokPromise<String> {
   }})
 }
 
+/*
+* @Description: 更新卖家信息
+* @Param: info 卖家信息
+* @Author: FAll
+* @Date: 2023-03-18 17:20:22
+*/
 export async function setSellerInfo(info:SellerInfo):RobokPromise<String> {
   
-  return await request({url:"/seller/update_seller_info",method:"POST",auth:true,json:true,data:{
+  return await request({url:"/seller/set_seller_info",method:"POST",auth:true,json:true,data:{
     ...info
   }})
 }

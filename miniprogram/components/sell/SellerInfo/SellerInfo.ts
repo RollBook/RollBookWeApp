@@ -2,14 +2,26 @@
 import { SellerInfo } from "../../../api/sell/types";
 import { getPhoneNumber } from "../../../api/sell/index";
 
-let timer:number|undefined = undefined; // 定时器序号
+let timer:number|undefined = undefined;   // 定时器序号
+export let tempSellerInfo:SellerInfo = {  // 临时卖家对象
+  nickName  :'',
+  school    :'',
+  address   :'',
+  phone  :'',
+  longitude :0,
+  latitude  :0
+};
 Component({
-  /**
-   * 组件的属性列表
-   */
-  properties: {
-    
-  },
+  // /**
+  //  * 组件的生命周期
+  //  */
+  // lifetimes: {
+  //   /** 监听组件初始化*/
+  //   attached:function() {
+  //     // 从本地缓存中 读取卖家信息到 临时卖家对象
+  //     tempSellerInfo = wx.getStorageSync("sellerInfo")
+  //   }
+  // },
 
   /**
    * 组件的初始数据
@@ -20,10 +32,10 @@ Component({
       nickName  :'',
       school    :'',
       address   :'',
-      phoneNum  :'',
+      phone  :'',
       longitude :0,
       latitude  :0
-    } as SellerInfo,
+    } as SellerInfo
   },
 
   /**
@@ -37,28 +49,25 @@ Component({
     * @Date: 2023-03-02 16:25:22
     */
     setSellerInfo(e:WechatMiniprogram.Input){
+      // 修改临时对象
+      switch(e.currentTarget.id) {
+        case 'nickName': {
+          tempSellerInfo.nickName =  e.detail.value;
+          break;
+        }
+        case "school": {
+          tempSellerInfo.school = e.detail.value;
+          break;
+        }
+      }
       // 页面防抖
       if(timer) {
         clearTimeout(timer);
       }
       timer = setTimeout(()=>{
-        // 初始化临时对象
-        let temp:SellerInfo; 
-        temp = this.data.sellerInfo;
-        // 修改临时对象
-        switch(e.currentTarget.id) {
-          case 'nickName': {
-            temp.nickName =  e.detail.value;
-            break;
-          }
-          case "school": {
-            temp.school = e.detail.value;
-            break;
-          }
-        }
         // 赋值给卖家信息
         this.setData({
-          sellerInfo:temp
+          sellerInfo:tempSellerInfo
         })
       }, 500);
     },
@@ -69,17 +78,14 @@ Component({
     * @Date: 2023-03-02 17:53:52
     */
    getAddress() {
-    // 初始化临时对象
-    let temp:SellerInfo; 
-    temp = this.data.sellerInfo;
     // 打开地图选择位置
     wx.chooseLocation({
       success:(res)=>{
-        temp.address = res.address;
-        temp.latitude = res.latitude;
-        temp.longitude = res.longitude;
+        tempSellerInfo.address = res.address;
+        tempSellerInfo.latitude = res.latitude;
+        tempSellerInfo.longitude = res.longitude;
         this.setData({
-          sellerInfo: temp
+          sellerInfo: tempSellerInfo
         });
       },
       fail:(err)=>{
@@ -100,18 +106,14 @@ Component({
     if(e.detail.errMsg.match('fail')) {
       return;
     }
-
-    // 初始化临时对象
-    let temp:SellerInfo; 
-    temp = this.data.sellerInfo;
     // 请求获取用户手机号码
     let res = await getPhoneNumber(e.detail.code);
     if(!res.data.data){
       return;
     }
-    temp.phoneNum = res.data.data.valueOf();
+    tempSellerInfo.phone = res.data.data.valueOf();
     this.setData({
-      sellerInfo:temp
+      sellerInfo:tempSellerInfo
     });
   }
 

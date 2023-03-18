@@ -1,6 +1,6 @@
 // pages/bookshelf/bookshelf.ts
-import { changeEvent } from "miniprogram/api/book/types";
-import { getSellBook } from "../../api/book/index";
+import { ChangeEvent } from "miniprogram/api/book/types";
+import { getSellBook } from "../../api/order/index";
 import { getOrder } from "../../api/order/index"
 Page({
 
@@ -23,14 +23,15 @@ Page({
         active:1
       })
     }
+    const ret = (await getSellBook())?.data?.data
     this.setData({
-      bookList: (await getSellBook())?.data?.data
+      bookList: ret?ret:undefined
     })
     
   },
 
   //切换书架
-   onChange:async function(event:changeEvent) {
+   onChange:async function(event:ChangeEvent) {
     let tag:string = ""
     if(event.detail.index===0) {
       tag = "卖书书架";

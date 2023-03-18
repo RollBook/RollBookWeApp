@@ -46,10 +46,10 @@
     title="手机号">
       <van-button type="primary" plain round size="mini" 
        open-type="getPhoneNumber" bindgetphonenumber="getPhoneNum"
-       wx:if="{{sellerInfo.phoneNum === ''}}">
+       wx:if="{{sellerInfo.phone === ''}}">
         获取号码
       </van-button>
-      <view wx:else> {{sellerInfo.phoneNum}} </view>
+      <view wx:else> {{sellerInfo.phone}} </view>
     </van-cell>
 
   </van-cell-group>
