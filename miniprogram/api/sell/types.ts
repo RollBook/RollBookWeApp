@@ -2,7 +2,7 @@
 export interface SellerInfo {
     nickName  : string
     school    : string
-    phoneNum  : string
+    phone  : string
     address   : string
     latitude  : number
     longitude : number
