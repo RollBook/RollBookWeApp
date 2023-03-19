@@ -2,27 +2,22 @@
 import { SellerInfo } from "../../../api/sell/types";
 import { getPhoneNumber } from "../../../api/sell/index";
 
-let timer:number|undefined = undefined;   // 定时器序号
-export let tempSellerInfo:SellerInfo = {  // 临时卖家对象
+let timer:number|undefined = undefined;       // 定时器序号
+export let isModifySellerInfo:boolean = false // 是否修改了卖家信息
+/**对外导出状态修改方法 */
+export function setModifySellerInfo(isModify:boolean):void{
+  isModifySellerInfo = isModify;
+}
+export let tempSellerInfo:SellerInfo = {      // 临时卖家对象
   nickName  :'',
   school    :'',
   address   :'',
-  phone  :'',
+  phone     :'',
   longitude :0,
   latitude  :0
 };
-Component({
-  // /**
-  //  * 组件的生命周期
-  //  */
-  // lifetimes: {
-  //   /** 监听组件初始化*/
-  //   attached:function() {
-  //     // 从本地缓存中 读取卖家信息到 临时卖家对象
-  //     tempSellerInfo = wx.getStorageSync("sellerInfo")
-  //   }
-  // },
 
+Component({
   /**
    * 组件的初始数据
    */
@@ -68,7 +63,8 @@ Component({
         // 赋值给卖家信息
         this.setData({
           sellerInfo:tempSellerInfo
-        })
+        });
+        isModifySellerInfo = true;
       }, 500);
     },
 
@@ -87,6 +83,7 @@ Component({
         this.setData({
           sellerInfo: tempSellerInfo
         });
+        isModifySellerInfo = true;
       },
       fail:(err)=>{
         console.log(err);
@@ -115,6 +112,7 @@ Component({
     this.setData({
       sellerInfo:tempSellerInfo
     });
+    isModifySellerInfo = true;
   }
 
   } 
