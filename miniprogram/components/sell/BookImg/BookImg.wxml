@@ -1,2 +1,34 @@
-<!--components/sell/BookImg/BookImg.wxml-->
-<text>components/sell/BookImg/BookImg.wxml</text>
+<!--书本图片采集-->
+<camera class="container" device-position="back" flash="off" binderror="error">
+  <!-- 书本大小轮廓 -->
+  <view class="outline">
+
+    <!-- 提示文字 -->
+    <view class="tip">
+      
+      <!-- 温馨提示 -->
+      <robok-text class="description">
+        每本书需拍摄 三张照片 (封面，背面，扉页),拍摄完成后向右滑动即可。
+      </robok-text>
+
+      <!-- 书本数量 -->
+      <view>
+       当前: 第 {{booksTempPaths.length === 0 ? 1 : 
+       shotState === "COVER" ? booksTempPaths.length+1 :  booksTempPaths.length}} 本
+      </view>
+
+      <!-- 当前书本位置 -->
+      <view>
+        {{shotState === "COVER" ? "封面" : shotState === "FLYLEAF" ? "扉页" : "背面"}}
+      </view>
+
+    </view>
+
+    <!-- 拍摄按钮 -->
+    <view class="shot-button" bindtap="takePhoto"/>
+
+    <!-- 已拍摄图片预览 -->
+    <image class="book-image" src="{{ bookImgPreview }}"/>
+
+  </view>
+</camera>

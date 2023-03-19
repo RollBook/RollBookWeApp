@@ -7,7 +7,7 @@ App<IAppOption>({
   * 全局变量
   */
   globalData: {
-    $api: "http://127.0.0.1:8899/api",
+    $api: "http://tqnnan.top:8899/api",
     isLogin: false
   },
 

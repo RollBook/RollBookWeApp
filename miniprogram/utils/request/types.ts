@@ -7,7 +7,7 @@ export interface CommonWechatRequest extends WechatMiniprogram.RequestOption<str
 /** 小程序响应 */
 export interface CommonWechatResponse<T> {
   data: CommonWechatResponseData<T>
-  statusCode: boolean
+  statusCode: number
   header: object
   cookies: string[]
 }
