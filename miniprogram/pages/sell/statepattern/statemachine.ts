@@ -1,5 +1,7 @@
 import { State } from "./state";
-import SellerStateInfo from "./concretestate/statesellerinfo";
+import StateSellerInfo from "./concretestate/statesellerinfo";
+import StateBookImg from "./concretestate/statebookimg";
+import StateBookInfo from "./concretestate/statesellerinfo";
 
 /**
 * 卖家页面状态机
@@ -12,7 +14,7 @@ export default class SellerStateMachine {
   private state:State;
 
   constructor(){
-    this.state = new SellerStateInfo();
+    this.state = new StateSellerInfo();
   }
 
   /*
@@ -33,4 +35,37 @@ export default class SellerStateMachine {
   getState():State {
     return this.state;
   }
+
+  /*
+  * @Description: 获取下一个状态
+  * @Param: currentState 当前状态
+  * @Author: FAll
+  * @Date: 2023-03-20 17:14:37
+  */
+  getNextState(currentState:State):State {
+    if(currentState instanceof StateSellerInfo) {
+      return new StateBookImg();
+    } else if(currentState instanceof StateBookImg) {
+      return new StateBookInfo();
+    } else {
+      return new StateSellerInfo();
+    }
+  }
+
+  /*
+  * @Description: 获取上一个状态
+  * @Param: currentState 当前状态
+  * @Author: FAll
+  * @Date: 2023-03-20 17:18:02
+  */
+  getLastState(currentState:State):State {
+    if(currentState instanceof StateBookInfo) {
+      return new StateBookImg();
+    } else if(currentState instanceof StateBookImg) {
+      return new StateSellerInfo();
+    } else {
+      return new StateSellerInfo();
+    }
+  }
+
 }

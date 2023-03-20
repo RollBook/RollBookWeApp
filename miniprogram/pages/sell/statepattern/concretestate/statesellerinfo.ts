@@ -9,12 +9,11 @@ import { tempSellerInfo, isModifySellerInfo, setModifySellerInfo }
 */
 export default class StateSellerInfo implements State {
 
-  /**
-  * 卖家信息 组件实例
-  */
+  /** 卖家信息 组件实例 */
   private component: WechatMiniprogram.Component.TrivialInstance;
 
   constructor() {
+    
     // 初始化组件实例
     this.component = getCurrentPages()
       .pop()?.selectComponent('#sellerinfo') as WechatMiniprogram.Component.TrivialInstance;
