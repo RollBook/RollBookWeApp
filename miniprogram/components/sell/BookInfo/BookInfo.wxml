@@ -16,27 +16,31 @@
     <!-- == 书本信息完善区 == -->
     <!-- 书本状态复选框 -->
     <view class="checkbox">
-      <van-checkbox-group value="{{ item.statusBox }}" bind:change="onChange">
+      <van-checkbox-group 
+        value="{{ item.statusBox }}" 
+        bind:change="onChange" 
+        data-index="{{index}}"
+        data-type="status">
 
         <van-row custom-class="first-row">
           <!-- 无缺页、残页 -->
           <van-col span="12">
-            <van-checkbox checked-color="var(--them-color)" name="8">无缺页、残页</van-checkbox>
+            <van-checkbox checked-color="var(--theme-color)" name="8">无缺页、残页</van-checkbox>
           </van-col>
           <!-- 印刷清晰 -->
           <van-col span="12">
-            <van-checkbox checked-color="var(--them-color)" name="4">印刷清晰</van-checkbox>
+            <van-checkbox checked-color="var(--theme-color)" name="4">印刷清晰</van-checkbox>
           </van-col>
         </van-row>
         
-        <van-row>
+        <van-row custom-class="secend-row">
           <!-- 无污渍、笔记 -->
           <van-col span="12">
-            <van-checkbox checked-color="var(--them-color)" name="2">无污渍、笔记</van-checkbox>
+            <van-checkbox checked-color="var(--theme-color)" name="2">无污渍、笔记</van-checkbox>
           </van-col>
           <!-- 封面干净 -->
           <van-col span="12">
-            <van-checkbox checked-color="var(--them-color)" name="1">封面干净</van-checkbox>
+            <van-checkbox checked-color="var(--theme-color)" name="1">封面干净</van-checkbox>
           </van-col>
         </van-row>
 
@@ -47,7 +51,9 @@
       <!-- 书本名称 -->
       <van-col span="12">
         <van-field
+        required
         data-index="{{ index }}"
+        data-type="bookName"
         value="{{ item.bookName }}"
         bind:change="onChange"
         label = "书名"
@@ -57,7 +63,9 @@
       <!-- 书本价格 -->
       <van-col span="12">
         <van-field
+        required
         data-index="{{ index }}"
+        data-type="price"
         value="{{ item.price }}"
         bind:change="onChange"
         label = "价格￥"
@@ -68,7 +76,8 @@
     <!-- 书本描述 -->
     <van-field
         data-index="{{ index }}"
-        value="{{ item.bookName }}"
+        data-type="description"
+        value="{{ item.description }}"
         bind:change="onChange"
         label = "描述信息"
         placeholder="请输入商品的描述"/>  

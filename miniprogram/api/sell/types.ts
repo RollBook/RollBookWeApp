@@ -14,7 +14,7 @@ export interface Book {
   price       : number
   press       : string
   status      : number
-  statusBox   : Array<"8"|"4"|"2"|"1">
+  statusBox   : StatusBox
   tag         : string
   url1        : string
   url2        : string
@@ -22,6 +22,8 @@ export interface Book {
   description : string
   timestamp   : string
 }
+
+export type StatusBox = Array<"8"|"4"|"2"|"1">
 
 /** 书本拍摄状态 */
 export type ShotState = 
@@ -36,3 +38,12 @@ export enum BookState {
   NOPAINTING  = 2,  // 无污渍、笔记
   CLEARCOVER  = 1   // 封面干净
 }
+
+/** 自定义书本信息输入事件 */
+export type BookOnSaleInput<Mark extends WechatMiniprogram.IAnyObject = WechatMiniprogram.IAnyObject,
+  TargetDataset extends WechatMiniprogram.IAnyObject = WechatMiniprogram.IAnyObject
+    > = WechatMiniprogram.CustomEvent<
+    StatusBox|String|Number,
+    Mark,
+    TargetDataset
+    >
