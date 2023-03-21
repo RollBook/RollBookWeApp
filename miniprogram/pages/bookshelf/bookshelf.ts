@@ -1,5 +1,5 @@
 // pages/bookshelf/bookshelf.ts
-import { ChangeEvent } from "miniprogram/api/book/types";
+import { ChangeEvent } from "miniprogram/api/bookshelf/types";
 import { getSellBook } from "../../api/order/index";
 import { getOrder } from "../../api/order/index"
 Page({

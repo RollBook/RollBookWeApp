@@ -1,7 +1,7 @@
 import { State } from "./state";
 import StateSellerInfo from "./concretestate/statesellerinfo";
 import StateBookImg from "./concretestate/statebookimg";
-import StateBookInfo from "./concretestate/statesellerinfo";
+import StateBookInfo from "./concretestate/statebookinfo";
 
 /**
 * 卖家页面状态机
@@ -45,7 +45,7 @@ export default class SellerStateMachine {
   getNextState(currentState:State):State {
     if(currentState instanceof StateSellerInfo) {
       return new StateBookImg();
-    } else if(currentState instanceof StateBookImg) {
+    } else if(currentState instanceof StateBookImg) {   
       return new StateBookInfo();
     } else {
       return new StateSellerInfo();

@@ -45,6 +45,7 @@ Page({
     if (e.detail.current - this.data.swiperIndex > 0) {
       // 先切换当前状态
       this.data._machine?.setState(this.data._machine.getNextState(state as State));
+      
       if (state?.canIContinue()) {
         // 满足条件，进入下一步
         state.handleContinue();

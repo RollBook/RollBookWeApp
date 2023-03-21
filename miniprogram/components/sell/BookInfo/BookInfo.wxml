@@ -1,2 +1,83 @@
 <!--components/sell/BookStatus/BookStatus.wxml-->
-<text>components/sell/BookStatus/BookStatus.wxml</text>
+<!-- 滑动视图 -->
+<scroll-view class="container" scroll-y scroll-top>
+
+  <!-- 列表渲染所有书本 -->
+  <van-cell-group inset wx:for="{{ bookList }}" wx:key="index">
+    
+    <!-- == 商品卡片预览区 == -->
+    <van-card
+      price="{{ item.price }}"
+      desc="{{ item.description }}"
+      title="{{ item.bookName }}"
+      thumb="{{ item.url1 }}">
+    </van-card>
+
+    <!-- == 书本信息完善区 == -->
+    <!-- 书本状态复选框 -->
+    <view class="checkbox">
+      <van-checkbox-group value="{{ item.statusBox }}" bind:change="onChange">
+
+        <van-row custom-class="first-row">
+          <!-- 无缺页、残页 -->
+          <van-col span="12">
+            <van-checkbox checked-color="var(--them-color)" name="8">无缺页、残页</van-checkbox>
+          </van-col>
+          <!-- 印刷清晰 -->
+          <van-col span="12">
+            <van-checkbox checked-color="var(--them-color)" name="4">印刷清晰</van-checkbox>
+          </van-col>
+        </van-row>
+        
+        <van-row>
+          <!-- 无污渍、笔记 -->
+          <van-col span="12">
+            <van-checkbox checked-color="var(--them-color)" name="2">无污渍、笔记</van-checkbox>
+          </van-col>
+          <!-- 封面干净 -->
+          <van-col span="12">
+            <van-checkbox checked-color="var(--them-color)" name="1">封面干净</van-checkbox>
+          </van-col>
+        </van-row>
+
+      </van-checkbox-group>
+    </view>
+
+    <van-row>
+      <!-- 书本名称 -->
+      <van-col span="12">
+        <van-field
+        data-index="{{ index }}"
+        value="{{ item.bookName }}"
+        bind:change="onChange"
+        label = "书名"
+        placeholder="书本名"/>  
+      </van-col>
+
+      <!-- 书本价格 -->
+      <van-col span="12">
+        <van-field
+        data-index="{{ index }}"
+        value="{{ item.price }}"
+        bind:change="onChange"
+        label = "价格￥"
+        type = "digit"/> 
+      </van-col>
+    </van-row>
+
+    <!-- 书本描述 -->
+    <van-field
+        data-index="{{ index }}"
+        value="{{ item.bookName }}"
+        bind:change="onChange"
+        label = "描述信息"
+        placeholder="请输入商品的描述"/>  
+    
+
+    <!-- 不同商品分隔线 -->
+    <van-divider dashed/>
+
+  </van-cell-group>
+
+</scroll-view>
+  

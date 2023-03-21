@@ -7,7 +7,7 @@ export default class StateBookImg implements State {
 
   constructor(){
     
-    // 组件实例初始化
+    // 获取组件实例
     this.component = getCurrentPages()
       .pop()?.selectComponent('#bookimg') as WechatMiniprogram.Component.TrivialInstance;
     
