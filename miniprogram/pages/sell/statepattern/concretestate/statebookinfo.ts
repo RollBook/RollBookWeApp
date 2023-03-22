@@ -9,14 +9,12 @@ export default class StateBookInfo implements State{
     constructor(){
 
       this.component = getCurrentPages()
-        .pop()?.selectComponent('#bookinfo') as WechatMiniprogram.Component.TrivialInstance;
-      // console.log(this.component.data.bookList);
+        .pop()?.selectComponent('#bookinfo') as WechatMiniprogram.Component.TrivialInstance
       
       // 根据bookImg页面的图片数目确定书本个数，并初始化书本信息组件的bookList
       const booksTempPaths = getCurrentPages()
         .pop()?.selectComponent('#bookimg')
-        .data.booksTempPaths as Array<[string,string,string]>;
-      // console.log(booksTempPaths);
+        .data.booksTempPaths as Array<[string,string,string]>
       
       const tempBookList:Book[] = this.component.data.bookList;
       let now = new Date().getTime()
