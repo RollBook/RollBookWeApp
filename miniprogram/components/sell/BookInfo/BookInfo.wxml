@@ -19,7 +19,7 @@
       <van-checkbox-group 
         value="{{ item.statusBox }}" 
         bind:change="onChange" 
-        data-index="{{index}}"
+        data-index="{{ index }}"
         data-type="status">
 
         <van-row custom-class="first-row">
@@ -47,31 +47,26 @@
       </van-checkbox-group>
     </view>
 
-    <van-row>
       <!-- 书本名称 -->
-      <van-col span="12">
         <van-field
         required
         data-index="{{ index }}"
         data-type="bookName"
         value="{{ item.bookName }}"
         bind:change="onChange"
-        label = "书名"
-        placeholder="书本名"/>  
-      </van-col>
+        placeholder="请输入书本的名称"
+        label = "书名"/>  
 
       <!-- 书本价格 -->
-      <van-col span="12">
         <van-field
         required
         data-index="{{ index }}"
         data-type="price"
-        value="{{ item.price }}"
+        value="{{ item.price === 0 ? '' :  item.price}}"
+        placeholder = "请输入书本价格"
         bind:change="onChange"
         label = "价格￥"
         type = "digit"/> 
-      </van-col>
-    </van-row>
 
     <!-- 书本描述 -->
     <van-field
@@ -80,7 +75,7 @@
         value="{{ item.description }}"
         bind:change="onChange"
         label = "描述信息"
-        placeholder="请输入商品的描述"/>  
+        placeholder="请输入书本的描述"/>  
     
 
     <!-- 不同商品分隔线 -->

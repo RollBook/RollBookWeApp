@@ -22,25 +22,25 @@ Component({
    */
   methods: {
     onChange(e:BookOnSaleInput) {
-      
+
       switch(e.currentTarget.dataset.type) {
         case "status": {
-          this.data.bookList[e.currentTarget.dataset.index].statusBox = e.detail as StatusBox
+          this.data.bookList[e.currentTarget.dataset.index].statusBox = e.detail as StatusBox;
           break;
         }
         case "bookName": {
-          this.data.bookList[e.currentTarget.dataset.index].bookName = e.detail as string
+          this.data.bookList[e.currentTarget.dataset.index].bookName = e.detail as string;
           break;
         }
         case "price": {
-          this.data.bookList[e.currentTarget.dataset.index].price = e.detail as number
+          this.data.bookList[e.currentTarget.dataset.index].price = e.detail as number;
           break;
         }
         case "description":{
-          this.data.bookList[e.currentTarget.dataset.index].description = e.detail as string
+          this.data.bookList[e.currentTarget.dataset.index].description = e.detail as string;
           break;
         }
-      }
+      };
       // 页面防抖
       if(timer) {
         clearTimeout(timer);
@@ -50,7 +50,6 @@ Component({
         this.setData({
           bookList:this.data.bookList
         });
-        console.log(this.data.bookList);
         
       }, 500);
       
