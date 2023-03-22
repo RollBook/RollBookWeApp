@@ -17,7 +17,6 @@ export default class StateBookImg implements State {
     // 更新组件实例
     this.component = getCurrentPages()
       .pop()?.selectComponent('#bookimg') as WechatMiniprogram.Component.TrivialInstance;
-
     // 判断最后一本书图片是拍摄完成
     const booksTempPaths:Array<[string,string,string]> = this.component.data.booksTempPaths
     if(booksTempPaths.length === 0)
