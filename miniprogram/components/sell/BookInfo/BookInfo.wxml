@@ -8,8 +8,8 @@
     <!-- == 商品卡片预览区 == -->
     <van-card
       price="{{ item.price }}"
-      desc="{{ item.description }}"
-      title="{{ item.bookName }}"
+      desc="{{ item.description === '' ? '暂无详情' : item.description }}"
+      title="{{ item.bookName === '' ? '书名' : item.bookName }}"
       thumb="{{ item.url1 }}">
     </van-card>
 
@@ -54,7 +54,7 @@
         data-type="bookName"
         value="{{ item.bookName }}"
         bind:change="onChange"
-        placeholder="请输入书本的名称"
+        placeholder="请输入书本名称"
         label = "书名"/>  
 
       <!-- 书本价格 -->
@@ -75,7 +75,7 @@
         value="{{ item.description }}"
         bind:change="onChange"
         label = "描述信息"
-        placeholder="请输入书本的描述"/>  
+        placeholder="请输入书本描述"/>  
     
 
     <!-- 不同商品分隔线 -->

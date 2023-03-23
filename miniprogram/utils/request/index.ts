@@ -26,10 +26,16 @@ export async function request<T extends object>(requestparams: CommonWechatReque
     wx.request({
       ...requestparams,
       url: baseUrl + requestparams.url,
+      timeout: 6000,
       success: (result: any) => {
         resolve(result)
       },
       fail: (err) => {
+        wx.showToast({
+          title:"服务异常",
+          icon:"error",
+          duration:1000
+        })
         reject(err)
       }
     })

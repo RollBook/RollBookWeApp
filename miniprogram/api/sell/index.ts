@@ -1,6 +1,6 @@
 import { request } from "../../utils/request/index";
 import { RobokPromise } from "../../utils/request/types";
-import { SellerInfo } from "./types";
+import { Book, SellerInfo } from "./types";
 
 /*
 * @Description: 获取用户手机号
@@ -28,4 +28,28 @@ export async function setSellerInfo(info:SellerInfo):RobokPromise<String> {
   return await request({url:"/seller/set_seller_info",method:"POST",auth:true,json:true,data:{
     ...info
   }})
+}
+
+export async function addBooks(books:Book[]) {
+
+  const openId:string = wx.getStorageSync("openid");
+  const bookToAdd = books.map((book:Book)=>{
+    return {
+      openId,
+      bookName:book.bookName,
+      price:book.price,
+      status:book.status,
+      description:book.description,
+      timestamp:book.timestamp
+    }
+  })
+  
+
+  return await request({
+    url:"/seller/add_books",
+    method:"POST",
+    auth:true,
+    json:true,
+    data:bookToAdd
+  })
 }

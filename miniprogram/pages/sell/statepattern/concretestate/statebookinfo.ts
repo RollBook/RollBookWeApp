@@ -1,4 +1,5 @@
 import { State } from "../state";
+import { addBooks } from "../../../../api/sell/index";
 import { Book } from "../../../../api/sell/types";
 
 export default class StateBookInfo implements State{
@@ -42,11 +43,46 @@ export default class StateBookInfo implements State{
     }
 
   canIContinue():boolean {
-    return true;
+
+    // 更新组件实例
+    this.component = getCurrentPages()
+    .pop()?.selectComponent('#bookinfo') as WechatMiniprogram.Component.TrivialInstance;
+
+    // 检查书本必填信息是否完整
+    const bookList:Book[] = this.component.data.bookList
+    
+    let isListOk:boolean = true;
+    bookList.forEach((book)=>{
+      // 检查必要信息
+      if(book.bookName.trim() === "" || book.price === 0) {
+        isListOk = false;
+        return;
+      }
+      
+      // 根据书本statusBox初始化status
+      book.statusBox.forEach(status=>{
+        book.status = book.status | parseInt(status)
+      })  
+
+    })
+
+    this.component.setData({
+      bookList:bookList
+    })
+  
+    return isListOk;
+    
   }
 
   async handleContinue() {
+    // 更新组件实例
+    this.component = getCurrentPages()
+    .pop()?.selectComponent('#bookinfo') as WechatMiniprogram.Component.TrivialInstance;
 
+    // 遍历bookList，上架书本
+    await addBooks(this.component.data.bookList);
+    
+    
   }
 
   handleBackwards() {

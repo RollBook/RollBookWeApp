@@ -36,8 +36,17 @@ export default class StateSellerInfo implements State {
           openid,
           session_key
         },
+        timeout: 6000,
         success: (res: any) => {
           this.initSellerInfoAndTempInfo(tempSellerInfo, res.data.data);
+        },
+        fail: ()=>{
+          wx.hideLoading()
+          wx.showToast({
+            title: "当前服务异常",
+            icon:"error",
+            duration: 1000
+          })
         }
       })
     } else {

@@ -7,7 +7,9 @@ App<IAppOption>({
   * 全局变量
   */
   globalData: {
-    $api: "http://tqnnan.top:8899/api",
+    // 生产环境 http://tqnnan.top:8899/api
+    // 开发环境 http://127.0.0.1:8899/api
+    $api: "http://127.0.0.1:8899/api",
     isLogin: false
   },
 
