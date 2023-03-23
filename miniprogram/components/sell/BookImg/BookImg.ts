@@ -15,7 +15,7 @@ Component({
   data: {
     bookImgPreview:"" as string,                        // 预览图片
     shotState     :"COVER" as ShotState,                // 拍摄状态
-    booksTempPaths:[] as Array<[string,string,string]> // 图片暂存路径
+    booksTempPaths:[] as Array<[string,string,string]>  // 图片暂存路径
   },
 
   /**

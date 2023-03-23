@@ -9,15 +9,19 @@ import { tempSellerInfo, isModifySellerInfo, setModifySellerInfo }
 */
 export default class StateSellerInfo implements State {
 
-  /**
-  * 卖家信息 组件实例
-  */
+  /** 卖家信息 组件实例 */
   private component: WechatMiniprogram.Component.TrivialInstance;
 
   constructor() {
+    
     // 初始化组件实例
     this.component = getCurrentPages()
       .pop()?.selectComponent('#sellerinfo') as WechatMiniprogram.Component.TrivialInstance;
+    
+    wx.showLoading({
+      title : "信息获取中",
+      mask  :true
+    })
     // 从缓存中获取卖家信息
     const storedSellerInfo = wx.getStorageSync("sellerInfo") as SellerInfo;
     // 如果缓存信息不存在，则向服务器请求买家信息
@@ -32,8 +36,17 @@ export default class StateSellerInfo implements State {
           openid,
           session_key
         },
+        timeout: 6000,
         success: (res: any) => {
           this.initSellerInfoAndTempInfo(tempSellerInfo, res.data.data);
+        },
+        fail: ()=>{
+          wx.hideLoading()
+          wx.showToast({
+            title: "当前服务异常",
+            icon:"error",
+            duration: 1000
+          })
         }
       })
     } else {
@@ -101,6 +114,8 @@ export default class StateSellerInfo implements State {
     // 初始化卖家对象
     this.component.setData({
       sellerInfo: storedSellerInfo
+    },()=>{
+      wx.hideLoading();
     });
 
   }

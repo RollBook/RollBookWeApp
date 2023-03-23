@@ -27,7 +27,7 @@ Component({
       nickName  :'',
       school    :'',
       address   :'',
-      phone  :'',
+      phone     :'',
       longitude :0,
       latitude  :0
     } as SellerInfo

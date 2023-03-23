@@ -1,2 +1,9 @@
 <!--components/sell/BookCommit/BookCommit.wxml-->
-<text>components/sell/BookCommit/BookCommit.wxml</text>
+<view class="container">
+  <view>
+    o( *≧▽≦)ツ
+  </view>
+  <view>
+    谢谢使用
+  </view>
+</view>
