@@ -34,7 +34,7 @@
     title="收获地址">
       <van-button type="primary" 
         round size="mini" plain
-        bindtap="getAddress" wx:if="{{sellerInfo.address === ''}}">
+        bindtap="getAddress" wx:if="{{sellerInfo.address === ''||sellerInfo.address === null}}">
         获取地址
       </van-button>
       <view wx:else> {{sellerInfo.address}} </view>
@@ -46,7 +46,7 @@
     title="手机号">
       <van-button type="primary" plain round size="mini" 
        open-type="getPhoneNumber" bindgetphonenumber="getPhoneNum"
-       wx:if="{{sellerInfo.phone === ''}}">
+       wx:if="{{sellerInfo.phone === '' || sellerInfo.phone === null}}">
         获取号码
       </van-button>
       <view wx:else> {{sellerInfo.phone}} </view>

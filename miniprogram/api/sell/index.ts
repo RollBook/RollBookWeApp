@@ -30,6 +30,12 @@ export async function setSellerInfo(info:SellerInfo):RobokPromise<String> {
   }})
 }
 
+/*
+* @Description: 卖家添加书本（不包含图片）
+* @Param: books 卖家上架书本
+* @Author: FAll
+* @Date: 2023-03-23 20:01:57
+*/
 export async function addBooks(books:Book[]) {
 
   const openId:string = wx.getStorageSync("openid");
@@ -44,7 +50,6 @@ export async function addBooks(books:Book[]) {
     }
   })
   
-
   return await request({
     url:"/seller/add_books",
     method:"POST",
