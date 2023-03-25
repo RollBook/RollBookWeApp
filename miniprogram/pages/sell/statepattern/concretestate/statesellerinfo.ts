@@ -22,13 +22,14 @@ export default class StateSellerInfo implements State {
       title : "信息获取中",
       mask  :true
     })
+    
     // 从缓存中获取卖家信息
     const storedSellerInfo = wx.getStorageSync("sellerInfo") as SellerInfo;
     // 如果缓存信息不存在，则向服务器请求买家信息
-    if (!storedSellerInfo) {
+    if (!storedSellerInfo && !isModifySellerInfo ) {
       let openid = wx.getStorageSync('openid');
       let session_key = wx.getStorageSync('session_key');
-
+      
       wx.request({
         url: getApp<IAppOption>().globalData.$api + "/seller/get_seller_info",
         method: "GET",
