@@ -1,5 +1,4 @@
 import { request } from "../../utils/request/index";
-import { RobokPromise } from "../../utils/request/types";
 import { Book, SellerInfo } from "./types";
 
 /*
@@ -8,13 +7,16 @@ import { Book, SellerInfo } from "./types";
 * @Author: FAll
 * @Date: 2023-03-02 19:10:00
 */
-export async function getPhoneNumber(code:string):RobokPromise<String> {
-  let openid:string = wx.getStorageSync('openid')
+export async function getPhoneNumber(code:string){
+  let openid:string = wx.getStorageSync("openid")
 
-  return await request({url:"/user/code2phone_num",method:"POST",auth:true,data:{
-    openid,
-    code
-  }})
+  return await request<String>({url:"/user/code2phone_num",
+    method:"POST",
+    auth:true,
+    data:{
+      openid,
+      code
+    }})
 }
 
 /*
@@ -23,11 +25,15 @@ export async function getPhoneNumber(code:string):RobokPromise<String> {
 * @Author: FAll
 * @Date: 2023-03-18 17:20:22
 */
-export async function setSellerInfo(info:SellerInfo):RobokPromise<String> {
+export async function setSellerInfo(info:SellerInfo) {
   
-  return await request({url:"/seller/set_seller_info",method:"POST",auth:true,json:true,data:{
-    ...info
-  }})
+  return await request<String>({
+    url:"/seller/set_seller_info",
+    method:"POST",
+    auth:true,
+    data:{
+      ...info
+    }})
 }
 
 /*
@@ -50,11 +56,10 @@ export async function addBooks(books:Book[]) {
     }
   })
   
-  return await request({
+  return await request<Book[]>({
     url:"/seller/add_books",
     method:"POST",
     auth:true,
-    json:true,
     data:bookToAdd
   })
 }
