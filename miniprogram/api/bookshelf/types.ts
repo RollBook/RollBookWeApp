@@ -20,6 +20,10 @@ interface DetailInfo{
   title :string
 }
 
-export interface ChangeEvent extends DetailInfo{
-  detail : DetailInfo
-}
+export type ChangeEvent<Mark extends WechatMiniprogram.IAnyObject = WechatMiniprogram.IAnyObject,
+  TargetDataset extends WechatMiniprogram.IAnyObject = WechatMiniprogram.IAnyObject
+    > = WechatMiniprogram.CustomEvent<
+    DetailInfo,
+    Mark,
+    TargetDataset
+    >

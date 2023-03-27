@@ -1,4 +1,4 @@
-import { CommonWechatRequest } from './types'
+import { RobokWechatRequest,RobokWechatResponse } from './types'
 
 const app = getApp<IAppOption>()
 
@@ -9,7 +9,7 @@ const app = getApp<IAppOption>()
 * @Author: FAll
 * @Date: 2023-02-23 15:58:49
 */
-export async function request<T extends object>(requestparams: CommonWechatRequest<T>):Promise<WechatMiniprogram.RequestSuccessCallbackResult<T>> {
+export async function request<T extends object>(requestparams: RobokWechatRequest<T>):Promise<RobokWechatResponse<T>> {
 
   // 从全局变量中读取baseURL
   const baseURL: string | undefined = app.globalData.$api
@@ -34,8 +34,8 @@ export async function request<T extends object>(requestparams: CommonWechatReque
       ...requestparams,
       url: baseURL + requestparams.url,
       timeout: 6000,
-      success: (result:WechatMiniprogram.RequestSuccessCallbackResult<T>) => {
-        // 取得响应，则完成Promise
+      success: (result:RobokWechatResponse<T>) => {
+        // 成功取得响应，则完成Promise
         resolve(result);
       },
       fail: (err) => {
@@ -51,6 +51,12 @@ export async function request<T extends object>(requestparams: CommonWechatReque
   });
 }
 
+/*
+* @Description: 封装wx文件上传
+* @Param: uploadOption 文件上传请求参数
+* @Author: FAll
+* @Date: 2023-03-26 21:41:23
+*/
 export async function uploadFile(uploadOption:WechatMiniprogram.UploadFileOption):Promise<WechatMiniprogram.UploadFileSuccessCallbackResult> {
 
   const baseURL: string | undefined = app.globalData.$api;
@@ -61,7 +67,11 @@ export async function uploadFile(uploadOption:WechatMiniprogram.UploadFileOption
       url: baseURL + uploadOption.url,
       success:(result)=>{
         resolve(result);
+      },
+      fail:(err)=>{
+        reject(err)
       }
     })
+
   })
 }

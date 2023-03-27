@@ -21,7 +21,7 @@ Page({
     // 获取并设置首页轮播url
     // TODO: 本地缓存轮播图url
     this.setData({
-      imgList: (await getIndexSwiper())?.data?.data
+      imgList: (await getIndexSwiper())?.data.data
     });
     
   },

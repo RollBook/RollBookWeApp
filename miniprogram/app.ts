@@ -1,6 +1,6 @@
 // app.ts
 import { userSession } from "./api/types";
-import { CommonWechatResponseData } from "./utils/request/types";
+import { RobokWechatResponseData } from "./utils/request/types";
 
 App<IAppOption>({
   /**
@@ -22,6 +22,7 @@ App<IAppOption>({
     // 获取用户登录态
     let openid = wx.getStorageSync("openid")
     let session_key = wx.getStorageSync("session_key")
+    
     const $api = this.globalData.$api
 
     if (!openid && !session_key) {
@@ -75,11 +76,10 @@ App<IAppOption>({
               'content-type': 'application/x-www-form-urlencoded'
             },
             // 登录成功后本地缓存用户的openid和session_key
-            success: res => {
+            success: (res:WechatMiniprogram.RequestSuccessCallbackResult<RobokWechatResponseData<userSession>>) => {
               if (res.statusCode === 200) {
-                const responseData = res.data as CommonWechatResponseData<userSession>
-                wx.setStorageSync("openid", responseData.data.openid)
-                wx.setStorageSync("session_key", responseData.data.session_key)
+                wx.setStorageSync("openid", res.data.data.openid)
+                wx.setStorageSync("session_key", res.data.data.session_key)
                 wx.showToast({
                   title: "欢迎使用罗伯克",
                   icon: "success",

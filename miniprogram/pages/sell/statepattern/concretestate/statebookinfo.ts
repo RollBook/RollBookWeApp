@@ -1,6 +1,7 @@
 import { State } from "../state";
 import { addBooks } from "../../../../api/sell/index";
 import { Book } from "../../../../api/sell/types";
+import { uploadFile } from "../../../../utils/request/index";
 
 export default class StateBookInfo implements State{
 
@@ -81,7 +82,16 @@ export default class StateBookInfo implements State{
 
     // 遍历bookList，上架书本
     await addBooks(this.component.data.bookList);
-    
+    await uploadFile({
+      url:"/seller/set_img",
+      name:"files",
+      filePath:this.component.data.bookList[0].url1,
+      formData:{
+        openid:wx.getStorageSync("openid"),
+        timestamp:this.component.data.bookList[0].timestamp,
+        rank:2
+      }
+    });
     
   }
 
