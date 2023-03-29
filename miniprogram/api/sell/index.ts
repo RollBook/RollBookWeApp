@@ -1,4 +1,4 @@
-import { request } from "../../utils/request/index";
+import { request,uploadFiles } from "../../utils/request/index";
 import { Book, SellerInfo } from "./types";
 
 /*
@@ -62,4 +62,38 @@ export async function addBooks(books:Book[]) {
     auth:true,
     data:bookToAdd
   })
+}
+
+/*
+* @Description: 卖家上传书本图片
+* @Param: books 所有书本
+* @Author: FAll
+* @Date: 2023-03-29 16:00:44
+*/
+export async function uploadBookImgs(books: Book[]) {
+  const bookImgs:string[] = []
+  const formDatas:WechatMiniprogram.IAnyObject[] = []
+  const openid = wx.getStorageSync("openid");
+
+  // 遍历书本列表，获取书本图片数组以及书本标识数组
+  books.forEach((book)=>{
+
+    for (let i = 0; i < 3; i++) {
+      bookImgs.push(book[`url${i+1}`])
+      formDatas.push({
+        rank: (i+1).toString(),
+        openid,
+        timestamp: book.timestamp,
+      })
+    }
+
+  })  
+
+  // 调用uploadFiles上传所有图片
+  return await uploadFiles({
+    filePaths: bookImgs,
+    formDatas,
+    url:"/seller/set_img"
+  })
+  
 }

@@ -17,7 +17,6 @@
     "noUnusedParameters": true,
     "strict": true,
     "strictPropertyInitialization": true,
-    "baseURL": ".",
     "types": ["miniprogram-api-typings"],
     "paths": {
       "@vant/weapp/*": ["./node_modules/@vant/weapp/dist/*"]

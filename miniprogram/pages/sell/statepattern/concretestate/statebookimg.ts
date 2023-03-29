@@ -10,7 +10,9 @@ export default class StateBookImg implements State {
     // 获取组件实例
     this.component = getCurrentPages()
       .pop()?.selectComponent('#bookimg') as WechatMiniprogram.Component.TrivialInstance;
-    
+    this.component.setData({
+      isShowCamera: true
+    })
   }
 
   canIContinue():boolean {
@@ -32,10 +34,22 @@ export default class StateBookImg implements State {
   }
 
   async handleContinue() {
+     // 更新组件实例
+     this.component = getCurrentPages()
+     .pop()?.selectComponent('#bookimg') as WechatMiniprogram.Component.TrivialInstance;
 
+     this.component.setData({
+       isShowCamera: false
+     })
   }
 
   handleBackwards() {
+    // 更新组件实例
+    this.component = getCurrentPages()
+    .pop()?.selectComponent('#bookimg') as WechatMiniprogram.Component.TrivialInstance;
 
+    this.component.setData({
+      isShowCamera: false
+    })
   }
 }

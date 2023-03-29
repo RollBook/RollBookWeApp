@@ -1,7 +1,7 @@
 import { State } from "../state";
-import { addBooks } from "../../../../api/sell/index";
+import { addBooks,uploadBookImgs } from "../../../../api/sell/index";
 import { Book } from "../../../../api/sell/types";
-import { uploadFile } from "../../../../utils/request/index";
+import { uploadFile,uploadFiles } from "../../../../utils/request/index";
 
 export default class StateBookInfo implements State{
 
@@ -79,19 +79,29 @@ export default class StateBookInfo implements State{
     // 更新组件实例
     this.component = getCurrentPages()
     .pop()?.selectComponent('#bookinfo') as WechatMiniprogram.Component.TrivialInstance;
+  
+    // 请求添加书本接口，上架书本
+    const ret = await (await addBooks(this.component.data.bookList)).data;
+    if(ret.status === 200) {
+      // 上架成功则请求上传书本图片
+      await uploadBookImgs(this.component.data.bookList);
+      wx.redirectTo({
+        url:"/pages/index/index"
+      })
 
-    // 遍历bookList，上架书本
-    await addBooks(this.component.data.bookList);
-    await uploadFile({
-      url:"/seller/set_img",
-      name:"files",
-      filePath:this.component.data.bookList[0].url1,
-      formData:{
-        openid:wx.getStorageSync("openid"),
-        timestamp:this.component.data.bookList[0].timestamp,
-        rank:2
-      }
-    });
+      setTimeout(()=>{
+        wx.showToast({
+          title:"上传成功"
+        })
+      },500)
+      
+    } else {
+      wx.showToast({
+        title   : "上传错误",
+        icon    : "error",
+        duration: 3000 
+      })
+    }
     
   }
 

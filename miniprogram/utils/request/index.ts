@@ -1,4 +1,4 @@
-import { RobokWechatRequest,RobokWechatResponse } from './types'
+import { RobokWechatRequest,RobokWechatResponse,uploadFilesOptions } from './types'
 
 const app = getApp<IAppOption>()
 
@@ -74,4 +74,69 @@ export async function uploadFile(uploadOption:WechatMiniprogram.UploadFileOption
     })
 
   })
+}
+
+/*
+* @Description: 封装wx多个文件上传
+* @Param: uploadOptions 自定义多文件上传options
+* @Author: FAll
+* @Date: 2023-03-29 15:41:30
+*/
+export async function uploadFiles(uploadOptions:uploadFilesOptions) {
+  
+  const baseURL: string | undefined = app.globalData.$api;
+  const uploadPromises:Promise<WechatMiniprogram.UploadFileSuccessCallbackResult>[] = [];
+  const formDatas = uploadOptions.formDatas;
+
+  wx.showLoading({
+    title : "上传中",
+    mask  : true
+  })
+
+  let isUploadErrorOccur:boolean = false;
+
+    // 遍历文件地址数组，初始化文件上传promises数组
+    uploadOptions.filePaths.forEach((path,index)=>{
+      
+      // 单个文件上传promise给push进promises数组，包含文件本体以及formData
+      uploadPromises.push(new Promise((resolve,reject)=>{
+        wx.uploadFile({
+          ...uploadOptions,
+          timeout: 6000,
+          filePath: path,
+          url: baseURL + uploadOptions.url,
+          name:"files",
+          formData:{
+            ...formDatas[index]
+          },
+          success: (ret=>{
+            resolve(ret)
+          }),
+          fail:(err)=>{  
+            if(isUploadErrorOccur) {
+              isUploadErrorOccur = true;
+              wx.hideLoading()
+              wx.showToast({
+                title :"上传失败",
+                icon  : "error" ,
+                duration:3000
+              })
+            }
+            reject(err)
+          }
+        })
+       }))
+
+    })
+
+    // 执行promise.all()进行上传 
+    const ret = await Promise.all(uploadPromises);
+    
+    wx.showToast({
+      title:"上传成功",
+      icon:"success",
+      duration:3000
+    })
+
+    return ret;
 }

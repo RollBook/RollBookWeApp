@@ -10,7 +10,14 @@ export type RobokWechatResponse<T> = WechatMiniprogram
 
 /** 自定义响应数据 */
 export interface RobokWechatResponseData<T> {
-  data:T,
-  msg:string,
+  data:T
+  msg:string
   status:number
+}
+
+/** 自定义上传选项 */
+export interface uploadFilesOptions{
+  filePaths: string[]
+  formDatas: WechatMiniprogram.IAnyObject[]
+  url: string
 }
