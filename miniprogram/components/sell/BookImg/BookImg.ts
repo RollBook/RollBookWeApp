@@ -13,6 +13,7 @@ Component({
    * 组件的初始数据
    */
   data: {
+    isShowCamera  : false as boolean,                   // 是否显示相机
     bookImgPreview:"" as string,                        // 预览图片
     shotState     :"COVER" as ShotState,                // 拍摄状态
     booksTempPaths:[] as Array<[string,string,string]>  // 图片暂存路径
@@ -52,6 +53,11 @@ Component({
             case "BACK":{
               this.data.booksTempPaths[this.data.booksTempPaths.length-1][2] = res.tempImagePath;
               nextState = "COVER";
+              wx.showToast({
+                title: `第${this.data.booksTempPaths.length}本采集成功`,
+                icon: "success",
+                duration: 600
+              })
               break;
             }
           }

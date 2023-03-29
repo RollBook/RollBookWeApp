@@ -1,16 +1,15 @@
 // pages/bookshelf/bookshelf.ts
-import { ChangeEvent } from "miniprogram/api/bookshelf/types";
-import { getSellBook } from "../../api/order/index";
-import { getOrder } from "../../api/order/index"
-Page({
+import { ChangeEvent } from "../../api/bookshelf/types";
+import { getSellBook,getOrder } from "../../api/bookshelf/index";
 
+Page({
   /**
    * 页面的初始数据
    */
   data: {
     active: 0,
     bookList: [] as String[] | undefined,
-    orderList:[] as String[] |undefined,
+    orderList:[] as String[] | undefined,
   },
 
   /**

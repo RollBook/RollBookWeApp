@@ -14,7 +14,7 @@ Component({
     // 当前选中的指示点颜色
     indicatorActiveColor: {
       type: String,
-      value: "#3bb168" as string
+      value: "var(--theme-color)" as string
     },
     // 是否自动切换
     autoplay: {

@@ -51,7 +51,7 @@ Component({
           bookList:this.data.bookList
         });
         
-      }, 500);
+      }, 200);
       
     }
   }

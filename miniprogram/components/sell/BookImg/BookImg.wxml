@@ -1,5 +1,5 @@
 <!--书本图片采集-->
-<camera class="container" device-position="back" flash="off" binderror="error">
+<camera class="container" device-position="back" flash="off" binderror="error" wx:if="{{isShowCamera}}">
   <!-- 书本大小轮廓 -->
   <view class="outline">
 

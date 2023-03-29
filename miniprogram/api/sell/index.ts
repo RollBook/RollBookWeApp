@@ -1,5 +1,4 @@
-import { request } from "../../utils/request/index";
-import { RobokPromise } from "../../utils/request/types";
+import { request,uploadFiles } from "../../utils/request/index";
 import { Book, SellerInfo } from "./types";
 
 /*
@@ -8,13 +7,16 @@ import { Book, SellerInfo } from "./types";
 * @Author: FAll
 * @Date: 2023-03-02 19:10:00
 */
-export async function getPhoneNumber(code:string):RobokPromise<String> {
-  let openid:string = wx.getStorageSync('openid')
+export async function getPhoneNumber(code:string){
+  let openid:string = wx.getStorageSync("openid")
 
-  return await request({url:"/user/code2phone_num",method:"POST",auth:true,data:{
-    openid,
-    code
-  }})
+  return await request<String>({url:"/user/code2phone_num",
+    method:"POST",
+    auth:true,
+    data:{
+      openid,
+      code
+    }})
 }
 
 /*
@@ -23,11 +25,15 @@ export async function getPhoneNumber(code:string):RobokPromise<String> {
 * @Author: FAll
 * @Date: 2023-03-18 17:20:22
 */
-export async function setSellerInfo(info:SellerInfo):RobokPromise<String> {
+export async function setSellerInfo(info:SellerInfo) {
   
-  return await request({url:"/seller/set_seller_info",method:"POST",auth:true,json:true,data:{
-    ...info
-  }})
+  return await request<String>({
+    url:"/seller/set_seller_info",
+    method:"POST",
+    auth:true,
+    data:{
+      ...info
+    }})
 }
 
 /*
@@ -50,11 +56,44 @@ export async function addBooks(books:Book[]) {
     }
   })
   
-  return await request({
+  return await request<Book[]>({
     url:"/seller/add_books",
     method:"POST",
     auth:true,
-    json:true,
     data:bookToAdd
   })
+}
+
+/*
+* @Description: 卖家上传书本图片
+* @Param: books 所有书本
+* @Author: FAll
+* @Date: 2023-03-29 16:00:44
+*/
+export async function uploadBookImgs(books: Book[]) {
+  const bookImgs:string[] = []
+  const formDatas:WechatMiniprogram.IAnyObject[] = []
+  const openid = wx.getStorageSync("openid");
+
+  // 遍历书本列表，获取书本图片数组以及书本标识数组
+  books.forEach((book)=>{
+
+    for (let i = 0; i < 3; i++) {
+      bookImgs.push(book[`url${i+1}`])
+      formDatas.push({
+        rank: (i+1).toString(),
+        openid,
+        timestamp: book.timestamp,
+      })
+    }
+
+  })  
+
+  // 调用uploadFiles上传所有图片
+  return await uploadFiles({
+    filePaths: bookImgs,
+    formDatas,
+    url:"/seller/set_img"
+  })
+  
 }
