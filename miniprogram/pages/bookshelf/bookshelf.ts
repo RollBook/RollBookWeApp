@@ -9,7 +9,7 @@ Page({
   data: {
     active: 0,
     bookList: [] as String[] | undefined,
-    orderList:[] as String[] |undefined,
+    orderList:[] as String[] | undefined,
   },
 
   /**

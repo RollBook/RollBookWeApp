@@ -52,6 +52,11 @@ Component({
             case "BACK":{
               this.data.booksTempPaths[this.data.booksTempPaths.length-1][2] = res.tempImagePath;
               nextState = "COVER";
+              wx.showToast({
+                title: `第${this.data.booksTempPaths.length}本采集成功`,
+                icon: "success",
+                duration: 600
+              })
               break;
             }
           }
