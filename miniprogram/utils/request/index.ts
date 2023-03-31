@@ -143,7 +143,6 @@ export async function uploadFiles(uploadOptions:uploadFilesOptions) {
             }
           }),
           fail:(err)=>{  
-            
             if(isUploadErrorOccur) {
               isUploadErrorOccur = true;
               wx.hideLoading()
@@ -161,7 +160,8 @@ export async function uploadFiles(uploadOptions:uploadFilesOptions) {
     })
     
     // 执行promise.all()进行上传 
-    const ret = await Promise.all(uploadPromises).then(res=>{
+    const ret = await Promise.all(uploadPromises)
+    .then(res=>{
       return res;
     }).catch(err=>{
       setTimeout(()=>{

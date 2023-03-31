@@ -46,22 +46,4 @@
 
   </view>
 
-<!--   
-  <van-grid column-num="2" custom-class="modules"
-   gutter="20" clickable="true" border="{{false}}">
-   
-      <van-grid-item content-class="module-content" 
-      text-class="module-text" icon="shop-o" text="商城" />
-
-      <van-grid-item content-class="module-content" 
-        text-class="module-text" icon="gold-coin-o" 
-        text="卖出" url="/pages/sell/sell"/>
-      
-      <van-grid-item content-class="module-content" 
-      text-class="module-text" icon="gift-o" text="存取" />
-     
-      <van-grid-item content-class="module-content" 
-      text-class="module-text" icon="apps-o" text="敬请期待" />
-  </van-grid> -->
-
 </view>
