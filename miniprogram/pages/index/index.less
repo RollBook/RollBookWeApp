@@ -2,22 +2,35 @@
 .container{
  letter-spacing: 2rpx;
 
-  .modules {
-   margin-top: 8vh;
-   padding-top: 30rpx;
-   padding-bottom: 30rpx;
-   .module-content {
-     border: solid darkgoldenrod;
-     padding: 40rpx;
-     box-shadow: 12px 0px 10px 0px rgba(0,0,0,0.5);
-     border-radius: 15rpx;
+ .flex-box {
+  margin-top: 20rpx;
+  width: 100vw;
+  height: 50vh;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+
+   .flex-item {
+    width: 38vw;
+    height: 270rpx;
+    padding: 7rpx;
+    letter-spacing: 15rpx;
+    background-color: rgba(255, 255, 255, 0.739);
+    box-shadow: 0 0 10rpx rgba(0, 0, 0, 0.5);
+    border-radius: 5%;
+    text-align: center;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+    &:active {
+      background-color: #ddd;
+    }
+    
+    .item-svg {
+      width: 170rpx;
+      height: 190rpx;
+    }
    }
-   .module-text {
-     letter-spacing: 8rpx;
-     font-family: "STXingkai";
-     font-size: large;
-     font-weight: bold;
-   }
-  }
+ }
 }
 

@@ -40,4 +40,40 @@ Page({
     });
   },
 
+  /*
+  * @Description: 跳转不同功能页
+  * @Param: e 事件对象
+  * @Author: FAll
+  * @Date: 2023-03-31 16:43:47
+  */
+  navigateTo(e:WechatMiniprogram.BaseEvent):void{
+    switch (e.currentTarget.id) {
+      case "1":{
+        wx.navigateTo({
+          url:"/pages/mall/mall"
+        })
+        break;
+      }
+      case "2":{
+        wx.navigateTo({
+          url:"/pages/sell/sell"
+        })
+        break;
+      }
+      case "3":{
+        wx.navigateTo({
+          url:"/pages/scan/scan"
+        })
+        break;
+      }
+      case "4":{
+        wx.showToast({
+          title:"敬请期待"
+        })
+        break;
+      }
+    }
+    
+  }
+
 })

@@ -5,7 +5,9 @@
     "pages/bookshelf/bookshelf",
     "pages/user/user",
     "pages/logs/logs",
-    "pages/sell/sell"
+    "pages/sell/sell",
+    "pages/mall/mall",
+    "pages/scan/scan"
   ],
   "tabBar": {
     "custom": true,
