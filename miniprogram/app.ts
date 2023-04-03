@@ -1,5 +1,5 @@
 // app.ts
-import { userSession } from "./api/types";
+import { UserSession } from "./api/types";
 import { RobokWechatResponseData } from "./utils/request/types";
 
 App<IAppOption>({
@@ -9,8 +9,11 @@ App<IAppOption>({
   globalData: {
     // 生产环境 http://tqnnan.top:8899/api
     // 开发环境 http://127.0.0.1:8899/api
-    $api: "http://tqnnan.top:8899/api",
-    isLogin: false
+    $api        : "http://127.0.0.1:8899/api",
+    isLogin     : false,
+    robokInfo   : undefined,
+    openid      : undefined,
+    session_key : undefined  
   },
 
   /**
@@ -19,6 +22,7 @@ App<IAppOption>({
   *   --FAll
   */
   onLaunch() {
+    
     // 获取用户登录态
     let openid = wx.getStorageSync("openid")
     let session_key = wx.getStorageSync("session_key")
@@ -65,6 +69,7 @@ App<IAppOption>({
       // 调用wx登录接口获取code
       wx.login({
         success: (res) => {
+          
           // 调用罗伯克登录接口，用微信官方返回的code进行注册或登录
           wx.request({
             url: `${$api}/user/login`,
@@ -76,7 +81,8 @@ App<IAppOption>({
               'content-type': 'application/x-www-form-urlencoded'
             },
             // 登录成功后本地缓存用户的openid和session_key
-            success: (res:WechatMiniprogram.RequestSuccessCallbackResult<RobokWechatResponseData<userSession>>) => {
+            success: (res:WechatMiniprogram.RequestSuccessCallbackResult<RobokWechatResponseData<UserSession>>) => {
+              
               if (res.statusCode === 200) {
                 wx.setStorageSync("openid", res.data.data.openid)
                 wx.setStorageSync("session_key", res.data.data.session_key)

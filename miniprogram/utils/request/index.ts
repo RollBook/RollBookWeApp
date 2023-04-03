@@ -1,4 +1,5 @@
 import { RobokWechatRequest,RobokWechatResponse,uploadFilesOptions } from './types'
+import { robokGetStorage } from "../../api/index";
 
 const app = getApp<IAppOption>()
 
@@ -12,20 +13,20 @@ const app = getApp<IAppOption>()
 export async function request<T extends object>(requestparams: RobokWechatRequest<T>):Promise<RobokWechatResponse<T>> {
 
   // 从全局变量中读取baseURL
-  const baseURL: string | undefined = app.globalData.$api
+  const baseURL: string | undefined = app.globalData.$api;
 
-  // 需要鉴权，则请求头中添加key
-  if (requestparams.auth && requestparams.header) {
-    requestparams.header.openid = wx.getStorageSync('openid')
-    requestparams.header.session_key = wx.getStorageSync('session_key')
+  // 如果调用方未定义header，则header定义为空对象
+  requestparams.header = requestparams.header ? requestparams.header : { };
+
+  // 需要鉴权，则header中添加key
+  if (requestparams.auth) {
+    requestparams.header.openid = robokGetStorage<string>("openid");
+    requestparams.header.session_key = robokGetStorage<string>("session_key");
   }
 
   // 方法为POST，则默认content-type为application/json
-  if(requestparams.method === "POST" && requestparams.header) {
-    requestparams.header = {
-      ...requestparams.header,
-      "content-type":"application/json",
-    }
+  if(requestparams.method === "POST") {
+    requestparams.header["content-type"] = "application/json";
   }
 
   // 封装wx.request()为Promise并返回
@@ -35,6 +36,15 @@ export async function request<T extends object>(requestparams: RobokWechatReques
       url: baseURL + requestparams.url,
       timeout: 6000,
       success: (result:RobokWechatResponse<T>) => {
+        if(result.statusCode === 500) {
+          wx.showToast({
+            title:"服务异常",
+            icon:"error",
+            duration:1000
+          });
+          reject(result);
+        }
+        
         // 成功取得响应，则完成Promise
         resolve(result);
       },
@@ -45,11 +55,13 @@ export async function request<T extends object>(requestparams: RobokWechatReques
           icon:"error",
           duration:1000
         });
+        
         reject(err);
       }
     });
   });
 }
+
 
 /*
 * @Description: 封装wx文件上传
@@ -60,6 +72,12 @@ export async function request<T extends object>(requestparams: RobokWechatReques
 export async function uploadFile(uploadOption:WechatMiniprogram.UploadFileOption):Promise<WechatMiniprogram.UploadFileSuccessCallbackResult> {
 
   const baseURL: string | undefined = app.globalData.$api;
+  uploadOption.header = uploadOption.header ? uploadOption.header : { };
+
+  uploadOption.header = {
+    openid      : robokGetStorage<string>("openid"),
+    session_key : robokGetStorage<string>("session_key")
+  }
 
   return new Promise((resolve,reject)=>{
     wx.uploadFile({
@@ -87,6 +105,12 @@ export async function uploadFiles(uploadOptions:uploadFilesOptions) {
   const baseURL: string | undefined = app.globalData.$api;
   const uploadPromises:Promise<WechatMiniprogram.UploadFileSuccessCallbackResult>[] = [];
   const formDatas = uploadOptions.formDatas;
+  uploadOptions.header = uploadOptions.header ? uploadOptions.header : { };
+
+  uploadOptions.header = {
+    openid      : robokGetStorage<string>("openid"),
+    session_key : robokGetStorage<string>("session_key")
+  }
 
   wx.showLoading({
     title : "上传中",
@@ -110,7 +134,11 @@ export async function uploadFiles(uploadOptions:uploadFilesOptions) {
             ...formDatas[index]
           },
           success: (ret=>{
-            resolve(ret)
+            if(ret.statusCode != 200) {
+              reject(ret);
+            } else {
+              resolve(ret);
+            }
           }),
           fail:(err)=>{  
             if(isUploadErrorOccur) {
@@ -128,15 +156,32 @@ export async function uploadFiles(uploadOptions:uploadFilesOptions) {
        }))
 
     })
-
-    // 执行promise.all()进行上传 
-    const ret = await Promise.all(uploadPromises);
     
-    wx.showToast({
-      title:"上传成功",
-      icon:"success",
-      duration:3000
-    })
+    // 执行promise.all()进行上传 
+    const ret = await Promise.all(uploadPromises)
+    .then(res=>{
+      return res;
+    }).catch(err=>{
+      setTimeout(()=>{
+        wx.showToast({
+          title:"上传失败",
+          icon:"error",
+          duration:3000
+        })
+      },500);
+      return err;
+    });
+    
+    // 如果返回值是数组，说明上传成功，获取到的是结果数组
+    if(ret.length) {
+      setTimeout(()=>{
+        wx.showToast({
+          title:"上传成功" ,
+          icon:"success"  ,
+          duration:3000
+        })
+      },500)
+    }    
 
     return ret;
 }

@@ -8,24 +8,42 @@
   <robok-swiper items="{{imgList}}"/>
 
   <!-- 功能模块 -->
-  <van-grid column-num="2" custom-class="modules"
-   gutter="20" clickable="true" border="{{false}}">
-      <!-- 商城 -->
-      <van-grid-item content-class="module-content" 
-      text-class="module-text" icon="shop-o" text="商城" />
+  <view class="flex-box">
 
-      <!-- 卖出 -->
-      <van-grid-item content-class="module-content" 
-        text-class="module-text" icon="gold-coin-o" 
-        text="卖出" url="/pages/sell/sell"/>
+    <!-- 商城 -->
+    <view id="1" class="flex-item" bindtap="navigateTo">
+      <view>
+        <image class="item-svg" src="../../img/mall.svg"/>
+        <view>
+          商城
+        </view>
+      </view>
+    </view>
 
-      <!-- 存取 -->
-      <van-grid-item content-class="module-content" 
-      text-class="module-text" icon="gift-o" text="存取" />
+    <!-- 上架 -->
+    <view id="2" class="flex-item" bindtap="navigateTo">
+      <image class="item-svg" src="../../img/sell.svg"/>
+      <view>
+        上架
+      </view>
+    </view>
 
-      <!-- 敬请期待 -->
-      <van-grid-item content-class="module-content" 
-      text-class="module-text" icon="apps-o" text="敬请期待" />
-  </van-grid>
+    <!-- 存取 -->
+    <view id="3" class="flex-item" bindtap="navigateTo">
+      <image class="item-svg" src="../../img/access.svg"/>
+      <view>
+        存取
+      </view>
+    </view>
+
+    <!-- 敬请期待 -->
+    <view id="4" class="flex-item" bindtap="navigateTo">
+      <image class="item-svg" src="../../img/more.svg"/>
+      <view>
+        敬请期待
+      </view>
+    </view>
+
+  </view>
 
 </view>

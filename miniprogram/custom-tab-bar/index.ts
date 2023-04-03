@@ -17,15 +17,15 @@ Component({
     active: null as number|null,
     list: [{
       pagePath: "../index/index",
-      icon:"home-o",
+      icon:"icon-book1",
       text: "首 页"
     }, {
       pagePath: "../bookshelf/bookshelf",
-      icon:"tosend",
+      icon:"icon-bookcaselibrarybookshelf",
       text: "书 架"
     }, {
       pagePath: "../user/user",
-      icon:"user-o",
+      icon:"icon-yonghu1",
       text: "用 户"
     }] as {
       pagePath: string,

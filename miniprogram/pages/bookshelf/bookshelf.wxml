@@ -18,8 +18,8 @@
         custom-class = "cover"
       >
         <view slot="footer">
-          <van-button round size="mini">下 架</van-button>
-          <van-button round size="mini">删 除</van-button>
+          <van-button round class="button" size="mini">下 架</van-button>
+          <van-button round class="button" size="mini">删 除</van-button>
        </view>
       </van-card>
     </view>
@@ -35,8 +35,8 @@
         custom-class = "cover"
       >
         <view slot="footer">
-          <van-button round size="mini">详 情</van-button>
-          <van-button round size="mini">删 除</van-button>
+          <van-button class="button" round size="mini">详 情</van-button>
+          <van-button class="button" round size="mini">删 除</van-button>
        </view>
       </van-card>
     </view>

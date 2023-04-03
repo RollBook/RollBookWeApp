@@ -20,4 +20,5 @@ export interface uploadFilesOptions{
   filePaths: string[]
   formDatas: WechatMiniprogram.IAnyObject[]
   url: string
+  header?: WechatMiniprogram.IAnyObject
 }

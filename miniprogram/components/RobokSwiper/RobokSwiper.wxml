@@ -3,7 +3,7 @@
     autoplay="{{autoplay}}" interval="{{interval}}">
 
     <swiper-item class="swiper-item" wx:for="{{items}}" wx:key="index">
-      <image src="{{item}}" mode="scaleToFill" data-index="{{index}}" binderror="imgLoadError"/>
+      <image class="image" src="{{item}}" mode="aspectFill" data-index="{{index}}" binderror="imgLoadError"/>
     </swiper-item>
     
 </swiper>

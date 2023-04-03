@@ -1,33 +1,18 @@
-// pages/user/user.ts
-import { robokGetStorage } from "../../api/index";
-import { UserInfo } from "../../api/types";
-
+// pages/scan/scan.ts
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    nickName  : "" as string,
-    avatar    : "" as string
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad() {
-    //更新tabbar激活状态
-    if(typeof this.getTabBar === "function" && this.getTabBar()) {
-      this.getTabBar().setData({
-        active:2
-      })
-    }
 
-    // 显示昵称
-    this.setData({
-      nickName: robokGetStorage<UserInfo>("userInfo").nickName
-    })
-    
   },
 
   /**

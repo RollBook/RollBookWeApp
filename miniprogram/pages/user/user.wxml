@@ -2,4 +2,28 @@
 
 <!-- 导航栏 -->
 <robok-nav-bar/>
-用户
+
+<!-- 用户 -->
+<view class="container-card">
+
+  <!-- 头像框 -->
+  <van-image
+  custom-class="avatar"
+  round
+  width="9rem"
+  height="9rem"
+  src="{{ avatar? avatar : '../../../../img/RoBok.jpg'}}"/>
+
+  <!-- 欢迎文字 -->
+  <view class="welcome-text">
+     <span wx:if="{{ nickName }}"> <span class="nick-name">{{ nickName }}</span> , </span> 欢迎使用转转书屋
+  </view>
+
+</view>
+
+<view class="container-menu">
+    <van-cell-group inset>
+      <van-cell title="单元格" value="内容" />
+      <van-cell title="单元格" value="内容" label="描述信息" />
+    </van-cell-group>
+  </view>
