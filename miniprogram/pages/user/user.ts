@@ -1,11 +1,15 @@
 // pages/user/user.ts
+import { robokGetStorage } from "../../api/index";
+import { UserInfo } from "../../api/types";
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    nickName  : "" as string,
+    avatar    : "" as string
   },
 
   /**
@@ -18,6 +22,11 @@ Page({
         active:2
       })
     }
+
+    // 显示昵称
+    this.setData({
+      nickName: robokGetStorage<UserInfo>("userInfo").nickName
+    })
     
   },
 

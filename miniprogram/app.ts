@@ -1,5 +1,5 @@
 // app.ts
-import { userSession } from "./api/types";
+import { UserSession } from "./api/types";
 import { RobokWechatResponseData } from "./utils/request/types";
 
 App<IAppOption>({
@@ -81,7 +81,7 @@ App<IAppOption>({
               'content-type': 'application/x-www-form-urlencoded'
             },
             // 登录成功后本地缓存用户的openid和session_key
-            success: (res:WechatMiniprogram.RequestSuccessCallbackResult<RobokWechatResponseData<userSession>>) => {
+            success: (res:WechatMiniprogram.RequestSuccessCallbackResult<RobokWechatResponseData<UserSession>>) => {
               
               if (res.statusCode === 200) {
                 wx.setStorageSync("openid", res.data.data.openid)
