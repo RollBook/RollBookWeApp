@@ -25,10 +25,7 @@ export async function request<T extends object>(requestparams: RobokWechatReques
 
   // 方法为POST，则默认content-type为application/json
   if(requestparams.method === "POST") {
-    requestparams.header = {
-      ...requestparams.header,
-      "content-type":"application/json",
-    };
+    requestparams.header["content-type"] = "application/json";
   }
 
   // 封装wx.request()为Promise并返回

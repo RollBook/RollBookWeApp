@@ -2,4 +2,21 @@
 
 <!-- 导航栏 -->
 <robok-nav-bar/>
-用户
+
+<!-- 用户 -->
+<view class="container-user">
+
+  <!-- 头像框 -->
+  <van-image
+  custom-class="avatar"
+  round
+  width="9rem"
+  height="9rem"
+  src="https://img.yzcdn.cn/vant/cat.jpeg"/>
+
+  <!-- 欢迎文字 -->
+  <view>
+    欢迎使用
+  </view>
+
+</view>

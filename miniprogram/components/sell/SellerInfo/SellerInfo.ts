@@ -64,7 +64,7 @@ Component({
         this.setData({
           sellerInfo:tempSellerInfo
         });
-        wx.setStorageSync("sellerInfo",tempSellerInfo);
+        wx.setStorageSync("userInfo",tempSellerInfo);
         isModifySellerInfo = true;
       }, 500);
     },
