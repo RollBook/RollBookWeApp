@@ -1,3 +1,4 @@
+import { robokGetStorage } from "../../api/index";
 import { request,uploadFiles } from "../../utils/request/index";
 import { Book, SellerInfo } from "./types";
 
@@ -8,7 +9,7 @@ import { Book, SellerInfo } from "./types";
 * @Date: 2023-03-02 19:10:00
 */
 export async function getPhoneNumber(code:string){
-  let openid:string = wx.getStorageSync("openid")
+  let openid = robokGetStorage<string>("openid");
 
   return await request<String>({url:"/user/code2phone_num",
     method:"POST",
@@ -44,7 +45,7 @@ export async function setSellerInfo(info:SellerInfo) {
 */
 export async function addBooks(books:Book[]) {
 
-  const openId:string = wx.getStorageSync("openid");
+  const openId = robokGetStorage<string>("openid");
   const bookToAdd = books.map((book:Book)=>{
     return {
       openId,
@@ -73,7 +74,7 @@ export async function addBooks(books:Book[]) {
 export async function uploadBookImgs(books: Book[]) {
   const bookImgs:string[] = []
   const formDatas:WechatMiniprogram.IAnyObject[] = []
-  const openid = wx.getStorageSync("openid");
+  const openid = robokGetStorage("openid");
 
   // 遍历书本列表，获取书本图片数组以及书本标识数组
   books.forEach((book)=>{

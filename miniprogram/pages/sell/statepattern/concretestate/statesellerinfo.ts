@@ -3,6 +3,7 @@ import { setSellerInfo } from "../../../../api/sell/index";
 import { SellerInfo } from "../../../../api/sell/types";
 import { tempSellerInfo, isModifySellerInfo, setModifySellerInfo }
   from "../../../../components/sell/SellerInfo/SellerInfo";
+import { robokSetStorage, robokGetStorage } from "../../../../api/index";
 
 /**
 * 卖家信息状态
@@ -24,11 +25,11 @@ export default class StateSellerInfo implements State {
     })
     
     // 从缓存中获取卖家信息
-    const storedSellerInfo = wx.getStorageSync("userInfo") as SellerInfo;
+    const storedSellerInfo = robokGetStorage("userInfo") as SellerInfo;
     // 如果缓存信息不存在，则向服务器请求买家信息
     if (!storedSellerInfo && !isModifySellerInfo ) {
-      let openid = wx.getStorageSync('openid');
-      let session_key = wx.getStorageSync('session_key');
+      let openid = robokGetStorage<string>("openid");
+      let session_key = robokGetStorage<string>("session_key");
       
       wx.request({
         url: getApp<IAppOption>().globalData.$api + "/seller/get_seller_info",
@@ -82,7 +83,7 @@ export default class StateSellerInfo implements State {
       })
       const ret = await setSellerInfo(this.component.data.sellerInfo);
       await wx.hideLoading()
-      wx.setStorageSync("userInfo", this.component.data.sellerInfo);
+      robokSetStorage("userInfo",this.component.data.sellerInfo);
       setModifySellerInfo(false);
       wx.showToast({
         title: ret.statusCode === 200 ? "同步成功" : "同步失败",

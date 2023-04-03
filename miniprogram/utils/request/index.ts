@@ -1,4 +1,5 @@
 import { RobokWechatRequest,RobokWechatResponse,uploadFilesOptions } from './types'
+import { robokGetStorage } from "../../api/index";
 
 const app = getApp<IAppOption>()
 
@@ -19,8 +20,8 @@ export async function request<T extends object>(requestparams: RobokWechatReques
 
   // 需要鉴权，则header中添加key
   if (requestparams.auth) {
-    requestparams.header.openid = wx.getStorageSync('openid');
-    requestparams.header.session_key = wx.getStorageSync('session_key');
+    requestparams.header.openid = robokGetStorage<string>("openid");
+    requestparams.header.session_key = robokGetStorage<string>("session_key");
   }
 
   // 方法为POST，则默认content-type为application/json
@@ -74,8 +75,8 @@ export async function uploadFile(uploadOption:WechatMiniprogram.UploadFileOption
   uploadOption.header = uploadOption.header ? uploadOption.header : { };
 
   uploadOption.header = {
-    openid      : wx.getStorageSync('openid'),
-    session_key : wx.getStorageSync('session_key')
+    openid      : robokGetStorage<string>("openid"),
+    session_key : robokGetStorage<string>("session_key")
   }
 
   return new Promise((resolve,reject)=>{
@@ -107,8 +108,8 @@ export async function uploadFiles(uploadOptions:uploadFilesOptions) {
   uploadOptions.header = uploadOptions.header ? uploadOptions.header : { };
 
   uploadOptions.header = {
-    openid      : wx.getStorageSync('openid'),
-    session_key : wx.getStorageSync('session_key')
+    openid      : robokGetStorage<string>("openid"),
+    session_key : robokGetStorage<string>("session_key")
   }
 
   wx.showLoading({

@@ -1,6 +1,7 @@
 // components/sell/BookInfo/BookInfo.ts
 import { SellerInfo } from "../../../api/sell/types";
 import { getPhoneNumber } from "../../../api/sell/index";
+import { robokSetStorage } from "../../../api/index";
 
 let timer:number|undefined = undefined;       // 定时器序号
 export let isModifySellerInfo:boolean = false // 是否修改了卖家信息
@@ -64,7 +65,7 @@ Component({
         this.setData({
           sellerInfo:tempSellerInfo
         });
-        wx.setStorageSync("userInfo",tempSellerInfo);
+        robokSetStorage("userInfo",tempSellerInfo);
         isModifySellerInfo = true;
       }, 500);
     },
