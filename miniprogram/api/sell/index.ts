@@ -1,5 +1,5 @@
 import { robokGetStorage } from "../../api/index";
-import { request,uploadFiles } from "../../utils/request/index";
+import { request, uploadFiles } from "../../utils/request/index";
 import { Book, SellerInfo } from "./types";
 
 /*
@@ -48,12 +48,12 @@ export async function addBooks(books:Book[]) {
   const openId = robokGetStorage<string>("openid");
   const bookToAdd = books.map((book:Book)=>{
     return {
-      openId,
-      bookName:book.bookName,
-      price:book.price,
-      status:book.status,
-      description:book.description,
-      timestamp:book.timestamp
+      bookName    :book.bookName,
+      price       :book.price,
+      status      :book.status,
+      description :book.description,
+      timestamp   :book.timestamp,
+      openId
     }
   })
   

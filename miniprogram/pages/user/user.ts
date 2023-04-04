@@ -1,5 +1,6 @@
 // pages/user/user.ts
-import { robokGetStorage } from "../../api/index";
+import { robokGetStorage,robokSetStorage } from "../../api/index";
+import { getUserInfo } from "../../api/index";
 import { UserInfo } from "../../api/types";
 
 Page({
@@ -15,17 +16,21 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad() {
+  async onLoad() {
     //更新tabbar激活状态
     if(typeof this.getTabBar === "function" && this.getTabBar()) {
       this.getTabBar().setData({
         active:2
       })
     }
-
+    let userInfo = robokGetStorage<UserInfo>("userInfo");
+    if(!userInfo) {
+      userInfo = (await getUserInfo()).data.data;
+      robokSetStorage("userInfo",userInfo);
+    }
     // 显示昵称
     this.setData({
-      nickName: robokGetStorage<UserInfo>("userInfo").nickName
+      nickName: userInfo.nickName
     })
     
   },

@@ -1,12 +1,7 @@
+import { UserInfo } from "../types";
+
 /** 卖家信息 */
-export interface SellerInfo {
-    nickName  : string
-    school    : string
-    phone     : string
-    address   : string
-    latitude  : number
-    longitude : number
-}
+export type SellerInfo = UserInfo
 
 /** 书本 */
 export interface Book {

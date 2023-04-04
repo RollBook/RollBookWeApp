@@ -1,3 +1,6 @@
+import { request } from "../utils/request/index";
+import { UserInfo } from "./types";
+
 const app = getApp<IAppOption>();
 
 /*
@@ -42,8 +45,22 @@ export function robokGetStorage<T extends Object>(key:string):T {
 export async function robokShowModal<T extends WechatMiniprogram.ShowModalOption = WechatMiniprogram.ShowModalOption>(
   option?: T) {
   wx.showModal({
-    title: "罗伯克书屋",
+    title       : "罗伯克书屋",
     confirmColor: "#38b48b",
     ...option
   })
+}
+
+/*
+* @Description: 获取用户基本信息
+* @Author: FAll
+* @Date: 2023-04-04 11:34:44
+*/
+export async function getUserInfo() {
+
+  return await request<UserInfo>({
+    url   : "/user/get_user_basic_info",
+    method: "GET",
+    auth  : true
+  }) 
 }
