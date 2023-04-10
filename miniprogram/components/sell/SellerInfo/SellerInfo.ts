@@ -65,7 +65,7 @@ Component({
         this.setData({
           sellerInfo:tempSellerInfo
         });
-        robokSetStorage("userInfo",tempSellerInfo);
+        robokSetStorage("robokInfo",tempSellerInfo);
         isModifySellerInfo = true;
       }, 500);
     },

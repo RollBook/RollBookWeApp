@@ -25,7 +25,7 @@ export default class StateSellerInfo implements State {
     })
     
     // 从缓存中获取卖家信息
-    const storedSellerInfo = robokGetStorage("userInfo") as SellerInfo;
+    const storedSellerInfo = robokGetStorage("robokInfo") as SellerInfo;
     
     // 如果缓存信息不存在，则向服务器请求买家信息
     if (!storedSellerInfo && !isModifySellerInfo ) {
@@ -43,7 +43,7 @@ export default class StateSellerInfo implements State {
         timeout: 6000,
         success: (res: any) => {
           this.initSellerInfoAndTempInfo(tempSellerInfo, res.data.data);
-          robokSetStorage("userInfo",tempSellerInfo)
+          robokSetStorage("robokInfo",tempSellerInfo)
         },
         fail: ()=>{
           wx.hideLoading()
@@ -86,7 +86,7 @@ export default class StateSellerInfo implements State {
       })
       const ret = await setSellerInfo(this.component.data.sellerInfo);
       await wx.hideLoading()
-      robokSetStorage("userInfo",this.component.data.sellerInfo);
+      robokSetStorage("robokInfo",this.component.data.sellerInfo);
       setModifySellerInfo(false);
       wx.showToast({
         title: ret.statusCode === 200 ? "同步成功" : "同步失败",

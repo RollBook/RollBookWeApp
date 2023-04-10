@@ -23,11 +23,12 @@ Page({
         active:2
       })
     }
-    let userInfo = robokGetStorage<UserInfo>("userInfo");
+    let userInfo = robokGetStorage<UserInfo>("robokInfo");
     if(!userInfo) {
       userInfo = (await getUserInfo()).data.data;
-      robokSetStorage("userInfo",userInfo);
+      robokSetStorage("robokInfo",userInfo);
     }
+    
     // 显示昵称
     this.setData({
       nickName: userInfo.nickName
