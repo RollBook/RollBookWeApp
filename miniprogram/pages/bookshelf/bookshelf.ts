@@ -39,8 +39,9 @@ Page({
       })
     }else{
       tag = "买书书架";
+      const ret = (await getOrder()).data
       this.setData({
-        orderList: (await getOrder())?.data?.data
+        orderList: ret.data
       })
     }
     wx.showToast({

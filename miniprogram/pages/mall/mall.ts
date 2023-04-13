@@ -1,18 +1,56 @@
 // pages/mall/mall.ts
+// import { goodInfo } from "../../api/mall/types";
+import { getMallSwiper,getGoods } from "../../api/mall/index";
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    cateList:[
+      {
+        image_src:'../../img/A-sixiang.svg',
+        name:'分享小间'
+      },
+      {
+        image_src:'../../img/F-jingji.svg',
+        name:'提升空间'
+      },
+      {
+        image_src:'../../img/O-shuxue.svg',
+        name:'智慧书屋'
+      },
+      {
+        image_src:'../../img/G-wenhua.svg',
+        name:'轻享书角'
+      }
+    ],
+    swiperList:[] as String[] | undefined,
+    goodsList: [] as String[] | undefined,
+    nowPage:1,
+    totalPage:1
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad() {
+  onLoad: async function() {
 
+    //获取商城轮播图
+    let ret = (await getMallSwiper()).data.data
+    this.setData({
+      swiperList: ret?ret:undefined
+    })
+    
+    //初始化加载商品
+    let nowPage = 1;
+    let goodsList = (await getGoods(nowPage)).data.data 
+    this.setData({
+      goodsList: goodsList?goodsList:undefined,
+      nowPage:nowPage+1
+    })
+    
   },
 
   /**
@@ -53,8 +91,16 @@ Page({
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom() {
-
+  onReachBottom:async function() {
+    //下拉触底加载后续商品
+    let nowPage = this.data.nowPage;
+    let goodsList = this.data.goodsList;
+    let newGoodsList = (await getGoods(nowPage)).data.data;
+    goodsList = goodsList?.concat(newGoodsList);
+    this.setData({
+      goodsList: goodsList?goodsList:undefined,
+      nowPage:nowPage+1
+    })
   },
 
   /**

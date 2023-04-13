@@ -1,4 +1,4 @@
-export interface BookInfo{
+export interface goodInfo{
   bookId      : string
   openId      : string
   bookName    : string
@@ -13,11 +13,3 @@ export interface BookInfo{
   description : string
   timeStamp   : string
 }
-
-interface DetailInfo{
-  index :number
-  name  :number
-  title :string
-}
-
-export type ChangeEvent = WechatMiniprogram.CustomEvent<DetailInfo>

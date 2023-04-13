@@ -1,7 +1,9 @@
 <!--pages/bookshelf/bookshelf.wxml-->
 
 <!-- 导航栏 -->
+<view class="divLine"></view>
 <robok-nav-bar/>
+
 
 <!-- 标签 -->
 <van-tabs active="{{ active }}"color="var(--theme-color)" bind:change="onChange">
