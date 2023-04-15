@@ -12,7 +12,7 @@ export async function getPhoneNumber(code:string){
   let openid = robokGetStorage<string>("openid");
 
   return await request<String>({url:"/user/code2phone_num",
-    method:"POST",
+    method:"GET",
     auth:true,
     data:{
       openid,
@@ -44,7 +44,7 @@ export async function setSellerInfo(info:SellerInfo) {
 * @Date: 2023-03-23 20:01:57
 */
 export async function addBooks(books:Book[]) {
-
+  console.log(books);
   const openId = robokGetStorage<string>("openid");
   const bookToAdd = books.map((book:Book)=>{
     return {

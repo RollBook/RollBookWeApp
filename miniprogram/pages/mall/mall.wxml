@@ -1,2 +1,48 @@
 <!--pages/mall/mall.wxml-->
-<text>pages/mall/mall.wxml</text>
+  <!-- 导航栏 -->
+  <robok-nav-bar isShowBack="{{true}}"/>
+
+<!-- 搜索栏 -->
+  <view class="search_input">
+    <navigator class="search" url="/pages/search/search" open-type="navigate" >搜索</navigator>
+  </view>
+
+<!-- 小空间导航栏 -->
+<view class="cate_index">
+  <navigator class="cate_navigator" url="{{navigate_url}}" wx:for="{{cateList}}" wx:key="name">
+    <image src="{{item.image_src}}" mode="widthFix"></image>
+    <view >{{item.name}}</view>
+  </navigator>
+</view>
+
+<!-- 分隔线 -->
+<view class="divLine"></view>
+
+<!-- 轮播图 -->
+<view>
+    <swiper class="swiper_index" autoplay="true" interval="2000" circular="{{true}}" indicator-dots="{{true}}">
+      <swiper-item class="cent" mode="widthFix" wx:for="{{swiperList}}" wx:key="id" >
+        <navigator class="" target="" url="" hover-class="navigator-hover" open-type="navigate">
+          <image src="{{item.imageSrc}}" />
+       </navigator>
+      </swiper-item>
+    </swiper>
+</view>
+
+<!-- 商品列表 -->
+<scroll-view class="goods-list" scroll-y="true" enable-flex="flexbox" scroll-anchoring="true" bindscrolltolower="scrolltolowerGooodsList" lower-threshold="10">
+  <view class="goods-list-item" wx:for="{{goodsList}}" wx:key="index" bindtap="toDetails" data-item="{{item}}">
+    <image class="goods-img" src="{{item.url1}}" lazy-load="true"></image>
+    <view class="goods-info">
+      <view class="goods-title">
+        {{item.bookName}}
+      </view>
+      <view class="goods-stock">
+      {{item.description}}
+      </view>
+      <view class="goods-price">
+        <text class="text">{{item.price}}元</text>
+      </view>
+    </view>
+  </view>
+</scroll-view>
