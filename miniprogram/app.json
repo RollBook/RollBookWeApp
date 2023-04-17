@@ -7,6 +7,8 @@
     "pages/logs/logs",
     "pages/sell/sell",
     "pages/mall/mall",
+    "pages/search/search",
+    "pages/good/good",
     "pages/scan/scan"
   ],
   "tabBar": {
