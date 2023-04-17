@@ -1,0 +1,45 @@
+<!--pages/good/good.wxml-->
+<!-- 导航栏 -->
+<robok-nav-bar isShowBack="{{true}}"/>
+
+<!-- 轮播图 -->
+<swiper class="card-swiper"  indicator-dots="true" circular="true" duration="500" indicator-color="#8799a3" indicator-active-color="var(--theme-color)">
+  <swiper-item class="swiper-item" bindtap="previewImage" mode="widthFix" data-url="{{item}}" wx:for="{{urlList}}" wx:key="id">
+      <image src="{{item}}"></image>
+  </swiper-item>
+</swiper>
+
+
+<!-- 价格、名称、详情 -->
+<view class="goods_price">￥{{goodList.price}}</view>
+<view class="goods_name">{{goodList.bookName}}</view>
+<view>
+  <view class="goods_details_title">书本详情</view>
+  <view class="goods_details">
+    <text >{{goodList.description}}</text>
+  </view>
+</view>
+<view>
+  <view class="goods_details_title">卖家信誉等级</view>
+  <van-rate readonly value="{{ value }}"/>
+</view>
+
+<!-- 底部工具栏 -->
+<view class="btm_tool">
+  <view class="tool_item">
+    <view  class="iconfont icon-kefu" style="font-size:45rpx"></view>
+    <view>联系卖家</view>
+    <button open-type="contact"></button>
+  </view>
+  <view class="tool_item">
+    <view  class="iconfont icon-fenxiang1"style="font-size:45rpx"></view>
+    <view>分享</view>
+    <button open-type="share"></button>
+  </view>
+  <navigator url="/pages/cart/cart" class="tool_item">
+    <view  class="iconfont icon-xiazai1"style="font-size:45rpx"></view>
+    <view>购物车</view>
+  </navigator>
+  <view class="btn_cart" bindtap="saveCart">加入购物车</view>
+  <navigator class="btn_buy" url="/pages/pay/pay?id={{id}}" >立即购买</navigator>
+</view>

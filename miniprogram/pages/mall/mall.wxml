@@ -31,18 +31,18 @@
 
 <!-- 商品列表 -->
 <scroll-view class="goods-list" scroll-y="true" enable-flex="flexbox" scroll-anchoring="true" bindscrolltolower="scrolltolowerGooodsList" lower-threshold="10">
-  <view class="goods-list-item" wx:for="{{goodsList}}" wx:key="index" bindtap="toDetails" data-item="{{item}}">
+  <navigator class="goods-list-item" wx:for="{{goodsList}}" wx:key="index" data-item="{{item}}" bindtap="tapTo" >
     <image class="goods-img" src="{{item.url1}}" lazy-load="true"></image>
     <view class="goods-info">
       <view class="goods-title">
         {{item.bookName}}
       </view>
-      <view class="goods-stock">
-      {{item.description}}
+      <view class="goods-stock" wx:for="{{status[index]}}" wx:key="index">
+      {{item}}
       </view>
       <view class="goods-price">
         <text class="text">{{item.price}}元</text>
       </view>
     </view>
-  </view>
+  </navigator>
 </scroll-view>

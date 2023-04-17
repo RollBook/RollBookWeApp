@@ -1,0 +1,46 @@
+<!--pages/search/search.wxml-->
+
+<!-- 导航栏 -->
+<robok-nav-bar isShowBack="{{true}}"/>
+
+<!-- 搜索栏 -->
+<view class="input_index">
+  <view class="input_input">
+    <text class="iconfont icon-sousuoxiao" style="color:#ffa500;"></text>
+    <input placeholder="请输入搜索内容" bindinput="searchInput"/>
+  </view>
+  <button class="primary-btn" size="mini" bindtap="searchButton"><text style="font-size:30rpx;">搜索</text></button>
+</view>
+
+<!-- 筛选栏 -->
+<view class="tabs">
+  <view class="tabs_index">
+    <view wx:for="{{tabs}}" wx:key="id" class="tabs_item {{item.isActive?'active':''}}" bindtap="handleItem" data-index="{{index}}">{{item.name}}</view>
+    <text class="iconfont icon-changyong_xiala {{change[0]?'tabs_text':''}}" bindtap="handleChange" ></text>
+    <text class="iconfont icon-changyong_shangshou {{change[1]?'tabs_text':''}}" bindtap="handleChange"></text>
+  </view>
+  <view class="">
+    <block wx:if="{{tabs[0].isActive}}"></block>
+    <block wx:elif="{{tabs[1].isActive}}"></block>
+    <block wx:elif="{{tabs[2].isActive}}"></block>
+  </view>
+</view>
+
+
+<!-- 商品列表 -->
+<scroll-view class="goods-list" scroll-y="true" enable-flex="flexbox" scroll-anchoring="true" bindscrolltolower="scrolltolowerGooodsList" lower-threshold="10">
+  <navigator class="goods-list-item" wx:for="{{goodList}}" wx:key="index" data-item="{{item}}" bindtap="tapTo">
+    <image class="goods-img" src="{{item.url1}}" lazy-load="true"></image>
+    <view class="goods-info">
+      <view class="goods-title">
+        {{item.bookName}}
+      </view>
+      <view class="goods-stock" wx:for="{{status[index]}}" wx:key="index">
+      {{item}}
+      </view>
+      <view class="goods-price">
+        <text class="text">{{item.price}}元</text>
+      </view>
+    </view>
+  </navigator>
+</scroll-view>

@@ -1,6 +1,6 @@
 // pages/mall/mall.ts
 // import { goodInfo } from "../../api/mall/types";
-import { getMallSwiper,getGoods } from "../../api/mall/index";
+import { getMallSwiper,getGoods,getStatus } from "../../api/mall/index";
 
 Page({
 
@@ -29,7 +29,14 @@ Page({
     swiperList:[] as String[] | undefined,
     goodsList: [] as String[] | undefined,
     nowPage:1,
-    totalPage:1
+    totalPage:1,
+    status:[] as string[][]
+  },
+  tapTo(e:any){
+    var bookId = e.currentTarget.dataset.item.bookId;
+    wx.navigateTo({
+      url:'/pages/good/good?id='+encodeURIComponent(bookId)
+    })
   },
 
   /**
@@ -45,12 +52,13 @@ Page({
     
     //初始化加载商品
     let nowPage = 1;
-    let goodsList = (await getGoods(nowPage)).data.data 
+    let goodsList = (await getGoods(nowPage)).data.data
+    let m:string[][] = getStatus(goodsList);  
     this.setData({
       goodsList: goodsList?goodsList:undefined,
-      nowPage:nowPage+1
-    })
-    
+      nowPage:nowPage+1,
+      status:m
+    }) 
   },
 
   /**
@@ -95,11 +103,15 @@ Page({
     //下拉触底加载后续商品
     let nowPage = this.data.nowPage;
     let goodsList = this.data.goodsList;
+    let status = this.data.status;
     let newGoodsList = (await getGoods(nowPage)).data.data;
+    let m:string[][] = getStatus(newGoodsList);  
     goodsList = goodsList?.concat(newGoodsList);
+    status = status.concat(m);
     this.setData({
       goodsList: goodsList?goodsList:undefined,
-      nowPage:nowPage+1
+      nowPage:nowPage+1,
+      status:status
     })
   },
 
