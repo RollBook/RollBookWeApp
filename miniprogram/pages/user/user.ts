@@ -12,6 +12,12 @@ Page({
     avatar    : "" as string
   },
 
+  cartTo(){
+    wx.navigateTo({
+      url:'/pages/cart/cart'
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */

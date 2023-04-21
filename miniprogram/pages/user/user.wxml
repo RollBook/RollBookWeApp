@@ -23,7 +23,10 @@
 
 <view class="container-menu">
     <van-cell-group inset>
-      <van-cell title="单元格" value="内容" />
-      <van-cell title="单元格" value="内容" label="描述信息" />
+      <van-cell icon="thumb-circle-o" title="信誉中心" is-link/>
+      <van-cell icon="notes-o" title="我的订单" is-link/>
+      <van-cell icon="shopping-cart-o" title="购物小车" is-link bindtap="cartTo"/>
+      <van-cell icon="gold-coin-o" title="退款/售后" is-link/>
+      <van-cell icon="records" title="意见反馈" is-link/>
     </van-cell-group>
   </view>
