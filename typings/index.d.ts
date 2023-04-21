@@ -7,7 +7,8 @@ interface IAppOption {
     isLogin     ?: boolean,
     robokInfo   ?: RobokInfo,
     openid      ?: string,
-    session_key ?: string
+    session_key ?: string,
+    indexSwiper ?: string[]
   }
   userInfoReadyCallback?: WechatMiniprogram.GetUserInfoSuccessCallback,
 }

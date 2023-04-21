@@ -14,3 +14,4 @@ export interface UserInfo {
   longitude : number
 }
 
+
