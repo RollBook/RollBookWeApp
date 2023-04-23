@@ -1,7 +1,7 @@
 // pages/good/good.ts
 import { cartInfo } from "../../api/cart/types";
-import { getGoodById,addCart } from "../../api/good/index";
-import { BookInfo } from "../../api/good/types";
+import { getGoodById,addCart, pay } from "../../api/good/index";
+import { BookInfo, Sign } from "../../api/good/types";
 Page({
 
   /**
@@ -61,6 +61,34 @@ Page({
       })
     }
     
+  },
+
+  async pay(){
+    let goodList = this.data.goodList;
+    let sign:Sign = (await pay(1,this.data.user_openid,goodList.openId,goodList.bookId)).data.data;
+    wx.requestPayment({
+      timeStamp: sign.timeStamp,
+      nonceStr: sign.nonceStr,
+      package: sign.package,
+      signType: sign.signType,
+      paySign: sign.paySign,
+      success (res) { 
+        console.log('success:' + JSON.stringify(res));
+        wx.showToast({
+          title: '支付成功',
+          icon: 'success',
+          duration: 2000
+        })
+      },
+      fail (res) { 
+        console.log('fail:' + JSON.stringify(res));
+        wx.showToast({
+          title: '支付失败',
+          icon: 'error',
+          duration: 2000
+        })
+      }
+    })
   },
 
   /**
