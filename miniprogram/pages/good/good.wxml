@@ -40,6 +40,6 @@
     <view  class="iconfont icon-xiazai1"style="font-size:45rpx"></view>
     <view>购物车</view>
   </navigator>
-  <view class="btn_cart" bindtap="saveCart">加入购物车</view>
+  <view id="van-dialog" class="btn_cart" bindtap="addCart">加入购物车</view>
   <navigator class="btn_buy" url="/pages/pay/pay?id={{id}}" >立即购买</navigator>
 </view>

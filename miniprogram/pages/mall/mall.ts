@@ -32,7 +32,7 @@ Page({
     totalPage:1,
     status:[] as string[][]
   },
-  tapTo(e:any){
+  tapTo(e:WechatMiniprogram.BaseEvent){
     var bookId = e.currentTarget.dataset.item.bookId;
     wx.navigateTo({
       url:'/pages/good/good?id='+encodeURIComponent(bookId)
@@ -53,7 +53,7 @@ Page({
     //初始化加载商品
     let nowPage = 1;
     let goodsList = (await getGoods(nowPage)).data.data
-    let m:string[][] = getStatus(goodsList);  
+    let m:string[][] = getStatus(goodsList);
     this.setData({
       goodsList: goodsList?goodsList:undefined,
       nowPage:nowPage+1,

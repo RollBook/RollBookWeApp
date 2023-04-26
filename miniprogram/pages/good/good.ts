@@ -1,6 +1,7 @@
 // pages/good/good.ts
-import { getGoodById } from "../../api/good/index";
-import { BookInfo,BookId } from "../../api/good/types";
+import { cartInfo } from "../../api/cart/types";
+import { getGoodById,addCart } from "../../api/good/index";
+import { BookInfo } from "../../api/good/types";
 Page({
 
   /**
@@ -8,7 +9,7 @@ Page({
    */
   data: {
     bookId:'',
-    goodList:{},
+    goodList:{} as BookInfo,
     user_openid:"",
     urlList:[] as string[],
     check:true,
@@ -25,12 +26,48 @@ Page({
       urls: urls
     })
   },
+  async addCart() {
+    let goodList = this.data.goodList;
+    let cart:cartInfo ={
+      bookId:"",
+      sellId:"",
+      bookName:"",
+      price:0,
+      url1:"",
+      description:"",
+      userId:"",
+      checked:false
+    }
+    cart.bookId = goodList.bookId,
+    cart.sellId = goodList.openId,
+    cart.bookName = goodList.bookName,
+    cart.price = goodList.price,
+    cart.url1 = goodList.url1,
+    cart.description = goodList.description,
+    cart.userId = this.data.user_openid;
+    cart.checked = false;
+    let res = await addCart(cart);
+    if(res.data.data==1){
+      wx.showToast({
+        title: '加入成功',
+        icon: 'success',
+        duration: 2000//持续的时间
+      })
+    }else{
+      wx.showToast({
+        title: '已在购物车中',
+        icon: 'error',
+        duration: 2000//持续的时间
+      })
+    }
+    
+  },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: async function(e:Record<string, string | undefined>) {
-    var user_openid = wx.getStorageSync('open_id')
+    var user_openid = wx.getStorageSync('openid')
     let a:string |undefined
     if(e.id){
       a = decodeURIComponent(e.id);

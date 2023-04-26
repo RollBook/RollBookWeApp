@@ -17,54 +17,32 @@ export function getStatus(goodsList:String[]){
   }
   for (let i = 0; i < goodsList.length; i++) {
     const s = goodsList[i]["status"];
-    if (s==1) {
-      m[i][0] = "封面干净"
-    }else if(s==2){
-      m[i][0] = "无污渍、笔记"
-    }else if(s==4){
-      m[i][0] = "印刷清晰"
-    }else if(s==8){
-      m[i][0] = "无缺页、残页"
-    }else if(s==3){
-      m[i][0] = "封面干净",
-      m[i][1] = "无污渍、笔记"
-    }else if(s==5){
-      m[i][0] = "封面干净",
-      m[i][1] = "印刷清晰"
-    }else if(s==9){
-      m[i][0] = "封面干净"
-      m[i][1] = "无缺页、残页"
-    }else if(s==6){
-      m[i][0] = "无污渍、笔记",
-      m[i][1] = "印刷清晰"
-    }else if(s==10){
-      m[i][0] = "无污渍、笔记",
-      m[i][1] = "无缺页、残页"
-    }else if(s==12){
-      m[i][0] = "印刷清晰",
-      m[i][1] = "无缺页、残页"
-    }else if(s==7){
-      m[i][0] = "封面干净",
-      m[i][1] = "无污渍、笔记",
-      m[i][2] = "印刷清晰"
-    }else if(s==11){
-      m[i][0] = "无缺页、残页",
-      m[i][1] = "印刷清晰",
-      m[i][2] = "无缺页、残页"
-    }else if(s==13){
-      m[i][0] = "封面干净",
-      m[i][1] = "印刷清晰",
-      m[i][2] = "无缺页、残页"
-    }else if(s==14){
-      m[i][0] = "无污渍、笔记",
-      m[i][1] = "印刷清晰",
-      m[i][2] = "无缺页、残页"
-    }else if(s==15){
-      m[i][0] = "封面干净",
-      m[i][1] = "无污渍、笔记",
-      m[i][2] = "印刷清晰",
-      m[i][3] = "无缺页、残页"
+    let a = bookDecode(s);  
+    for (let j = 0; j < a.length; j++) {
+      switch (a[j]) {
+        case 1:
+          m[i][j] = "封面干净"
+          break;
+        case 2:
+          m[i][j] = "无污渍、笔记"
+          break;
+        case 4:
+          m[i][j] = "印刷清晰"
+          break;
+        case 8:
+          m[i][j] = "无缺页、残页"
+          break;
+      } 
     }
   }
   return m;
+}
+
+
+function bookDecode(status:number) {
+  return [1,2,4,8]
+  .map((statusCode)=>{
+    return (status&statusCode)
+  })
+  .filter((status)=>{return status!== 0})
 }

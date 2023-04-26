@@ -31,7 +31,7 @@
 
 <!-- 商品列表 -->
 <scroll-view class="goods-list" scroll-y="true" enable-flex="flexbox" scroll-anchoring="true" bindscrolltolower="scrolltolowerGooodsList" lower-threshold="10">
-  <navigator class="goods-list-item" wx:for="{{goodsList}}" wx:key="index" data-item="{{item}}" bindtap="tapTo" >
+  <view class="goods-list-item" wx:for="{{goodsList}}" wx:key="index" data-item="{{item}}" bindtap="tapTo" >
     <image class="goods-img" src="{{item.url1}}" lazy-load="true"></image>
     <view class="goods-info">
       <view class="goods-title">
@@ -44,5 +44,5 @@
         <text class="text">{{item.price}}元</text>
       </view>
     </view>
-  </navigator>
+  </view>
 </scroll-view>

@@ -9,6 +9,7 @@
     "pages/mall/mall",
     "pages/search/search",
     "pages/good/good",
+    "pages/cart/cart",
     "pages/scan/scan"
   ],
   "tabBar": {
