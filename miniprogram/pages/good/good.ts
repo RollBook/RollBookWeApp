@@ -65,7 +65,8 @@ Page({
 
   async pay(){
     let goodList = this.data.goodList;
-    let sign:Sign = (await pay(1,this.data.user_openid,goodList.openId,goodList.bookId)).data.data;
+    let price = goodList.price*100
+    let sign:Sign = (await pay(10000,this.data.user_openid,goodList.openId,goodList.bookId)).data.data;
     wx.requestPayment({
       timeStamp: sign.timeStamp,
       nonceStr: sign.nonceStr,
@@ -74,6 +75,12 @@ Page({
       paySign: sign.paySign,
       success (res) { 
         console.log('success:' + JSON.stringify(res));
+        let pages = getCurrentPages();
+        let beforePage = pages[pages.length -2]; 
+        beforePage.go_update(); 
+        wx.navigateBack({
+          delta:1
+        })
         wx.showToast({
           title: '支付成功',
           icon: 'success',

@@ -29,7 +29,7 @@
     </view>
 
     <!-- 存取 -->
-    <view id="3" class="flex-item" bindtap="navigateTo">
+    <view id="3" class="flex-item" bindtap="scan">
       <image class="item-svg" src="../../img/access.svg"/>
       <view>
         存取

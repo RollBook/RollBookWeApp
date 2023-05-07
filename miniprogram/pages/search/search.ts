@@ -53,6 +53,10 @@ Page({
       url:'/pages/good/good?id='+encodeURIComponent(bookId)
     })
   },
+  go_update(){
+    console.log('我更新啦')
+  },
+
 
 
   async handleItem(e:WechatMiniprogram.BaseEvent){

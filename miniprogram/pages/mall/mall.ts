@@ -38,6 +38,10 @@ Page({
       url:'/pages/good/good?id='+encodeURIComponent(bookId)
     })
   },
+  
+  go_update(){
+    this.onLoad();
+  },
 
   /**
    * 生命周期函数--监听页面加载

@@ -9,6 +9,18 @@ Page({
     imgList: [] as string[]
   },
 
+  scan(){
+    wx.scanCode({
+      success (res) {
+        if (res.result=="RollBook二手书屋") {
+          wx.navigateTo({
+            url: '/pages/scan/scan',
+          })
+        }
+      }
+    })
+  },
+
   onLoad:async function() {
     
     // 更新tabbar激活状态
