@@ -3,7 +3,6 @@ import { robokGetStorage } from "../../api/index";
 
 export async function getOrder() {
   let openid = robokGetStorage<string>("openid");
-
   return await request<String[]>({url:"/order/get_order",method:"GET",auth:true,data:{
     openid
   }});

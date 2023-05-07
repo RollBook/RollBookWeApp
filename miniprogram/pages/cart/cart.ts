@@ -1,6 +1,7 @@
 // pages/cart/cart.ts
-import { getCart,delCart } from "../../api/cart/index";
+import { getCart,delCart,cartPay } from "../../api/cart/index";
 import { cartInfo } from "../../api/cart/types";
+import { Sign } from "../../api/good/types";
 Page({
 
   /**
@@ -14,6 +15,39 @@ Page({
     show:[],
     idList:[] as string[],
     check:true
+  },
+
+  async pay(){
+    let cartList = this.data.cartList;
+    let sign:Sign = (await cartPay(1,cartList)).data.data;
+    var that = this;
+    wx.requestPayment({
+      timeStamp: sign.timeStamp,
+      nonceStr: sign.nonceStr,
+      package: sign.package,
+      signType: sign.signType,
+      paySign: sign.paySign,
+      success (res) { 
+        console.log('success:' + JSON.stringify(res));
+        that.setData({
+          sum:0
+        })
+        that.onLoad();
+        wx.showToast({
+          title: '支付成功',
+          icon: 'success',
+          duration: 2000
+        })
+      },
+      fail (res) { 
+        console.log('fail:' + JSON.stringify(res));
+        wx.showToast({
+          title: '支付失败',
+          icon: 'error',
+          duration: 2000
+        })
+      }
+    })
   },
 
   checkboxChange(e:WechatMiniprogram.BaseEvent){

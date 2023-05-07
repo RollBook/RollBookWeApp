@@ -17,3 +17,11 @@ export interface BookInfo{
   description : string
   timeStamp   : string
 }
+
+export interface Sign{
+  timeStamp: string,
+  nonceStr: string,
+  package: string,
+  signType: "MD5" | "HMAC-SHA256" | "RSA" | undefined,
+  paySign: string,
+}

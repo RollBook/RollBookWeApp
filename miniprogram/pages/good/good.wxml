@@ -21,7 +21,7 @@
 </view>
 <view>
   <view class="goods_details_title">卖家信誉等级</view>
-  <van-rate readonly value="{{ value }}"/>
+  <van-rate readonly color="gold" value="{{ value }}"/>
 </view>
 
 <!-- 底部工具栏 -->
@@ -41,5 +41,5 @@
     <view>购物车</view>
   </navigator>
   <view id="van-dialog" class="btn_cart" bindtap="addCart">加入购物车</view>
-  <navigator class="btn_buy" url="/pages/pay/pay?id={{id}}" >立即购买</navigator>
+  <view class="btn_buy" bindtap="pay">立即购买</view>
 </view>
