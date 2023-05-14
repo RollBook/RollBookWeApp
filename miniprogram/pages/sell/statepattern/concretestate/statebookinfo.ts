@@ -17,10 +17,11 @@ export default class StateBookInfo implements State{
         .pop()?.selectComponent('#bookimg')
         .data.booksTempPaths as Array<[string,string,string]>
       
-      const tempBookList:Book[] = this.component.data.bookList;
+      const tempBookList:Book[] = JSON.parse(JSON.stringify(this.component.data.bookList));
       let now = new Date().getTime()
-
-      for (let i = 0; i < (booksTempPaths.length - this.component.data.bookList.length); i++) {
+      
+      for (let i = 0; i < ((booksTempPaths.length) - (this.component.data.bookList.length)); i++) {
+       
         const book:Book = {
           bookName    : "",
           price       : 0.00,
