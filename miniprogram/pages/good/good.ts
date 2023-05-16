@@ -66,7 +66,7 @@ Page({
   async pay(){
     let goodList = this.data.goodList;
     let price = goodList.price*100
-    let sign:Sign = (await pay(10000,this.data.user_openid,goodList.openId,goodList.bookId)).data.data;
+    let sign:Sign = (await pay(1,this.data.user_openid,goodList.openId,goodList.bookId)).data.data;
     wx.requestPayment({
       timeStamp: sign.timeStamp,
       nonceStr: sign.nonceStr,

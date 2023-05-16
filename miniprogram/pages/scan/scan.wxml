@@ -25,7 +25,7 @@
   <van-tab title="取书">
     <view  wx:for="{{orderList}}" wx:key="index">
       <van-card
-        tag="标签"
+        tag="待取出"
         price="{{item.book.price}}"
         desc="{{item.book.description}}"
         title="{{item.book.bookName}}"
